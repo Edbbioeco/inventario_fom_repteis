@@ -127,6 +127,20 @@ janela
 
 spdep::moran.mc(grade$Richness, janela, nsim = 999)
 
+## Calcular a regressão geográfica ----
+
+### Calcular coordenadas ----
+
+grade <- grade |> 
+  dplyr::bind_cols(grade |> 
+                     sf::st_centroid() |> 
+                     sf::st_coordinates() |>
+                     as.data.frame() |> 
+                     dplyr::rename("Longitude" = 1,
+                                   "Latitude" = 2))
+
+grade
+
 ## Dissimilaridade das comunidades ----
 
 ### Calcular a dissimilaridade global ----
