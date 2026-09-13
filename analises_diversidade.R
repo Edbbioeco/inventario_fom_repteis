@@ -400,6 +400,18 @@ moran_dis_flex
 
 moran_dis_flex |> flextable::save_as_docx(path = "i_moran_indices.docx")
 
+## Modelo de Erro Espacial ----
+
+### Adicionar coluna de dissimilaridades ----
+
+grade_modelos <- grade_modelos |> 
+  sf::st_join(grade |> 
+                dplyr::distinct(grade |> sf::st_geometry(), 
+                                .keep_all = TRUE) |> 
+                dplyr::select(Jaccard, Turnover, Nestdeness))
+
+grade_modelos
+
 # Compartilhamento de espécies ----
 
 ## Calcular ----
