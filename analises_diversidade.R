@@ -121,6 +121,10 @@ janela <- grade |>
 
 janela
 
+### Calcular teste I de Moran ----
+
+spdep::moran.mc(grade$Richness, janela, nsim = 999)
+
 ## Dissimilaridade das comunidades ----
 
 ### Calcular a dissimilaridade global ----
