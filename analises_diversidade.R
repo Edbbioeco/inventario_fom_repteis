@@ -12,7 +12,7 @@ library(ggview)
 
 library(spdep)
 
-library(nlme)
+library(spatialreg)
 
 library(betapart)
 
