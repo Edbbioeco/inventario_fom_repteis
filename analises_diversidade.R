@@ -353,7 +353,7 @@ ggsave(filename = "dissimilaridade_fom.png",
 
 ## Teste I de Moran ----
 
-## Calcular I de Moran para cada índice ----
+### Calcular I de Moran para cada índice ----
 
 moran_dis <- purrr::map(c("Jaccard", "Turnover", "Nestdeness"),
            purrr::in_parallel(
