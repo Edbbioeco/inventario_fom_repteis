@@ -131,16 +131,20 @@ spdep::moran.mc(grade$Richness, janela, nsim = 999)
 
 ### Calcular coordenadas ----
 
-grade <- grade |> 
+grade_modelos <- grade |> 
+  dplyr::distinct(grade |> sf::st_geometry(), 
+                  .keep_all = TRUE) |> 
   dplyr::bind_cols(grade |> 
+                     dplyr::distinct(grade |> sf::st_geometry(), 
+                                     .keep_all = TRUE) |> 
                      sf::st_centroid() |> 
                      sf::st_coordinates() |>
                      as.data.frame() |> 
                      dplyr::rename("Longitude" = 1,
                                    "Latitude" = 2))
 
-grade
-
+grade_modelos
+  
 ## Dissimilaridade das comunidades ----
 
 ### Calcular a dissimilaridade global ----
