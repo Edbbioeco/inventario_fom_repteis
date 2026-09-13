@@ -173,6 +173,49 @@ modelo_riqueza
 
 modelo_riqueza |> summary()
 
+### Tabela das estatísticas ----
+
+tabela_riqueza <- modelo_riqueza |> 
+  broom::tidy() |> 
+  dplyr::slice(2:4) |> 
+  dplyr::rename("Predictor" = 1,
+                "z" = 4,
+                "p" = 5) |> 
+  dplyr::mutate(estimate = estimate |> round(3),
+                std.error = std.error |> round(3),
+                z = z |> round(2),
+                p = dplyr::case_when(p < 0.01 ~ "< 0.01",
+                                     .default = p |>
+                                       round(2) |> 
+                                       as.character())) |> 
+  tidyr::unite(sep = " ± ",
+               col = "β ± SE",
+               2:3) |> 
+  flextable::flextable() |> 
+  flextable::align(align = "center", part = "all") |> 
+  flextable::width(j = 2, width = 1.5) |> 
+  flextable::set_caption(caption = paste0(
+    "λ = ", 
+    modelo_riqueza$lambda |> round(2),
+    ", z = ",
+    (modelo_riqueza$lambda / modelo_riqueza$lambda.se) |> round(2),
+    ", p ",
+    pnorm((modelo_riqueza$lambda / modelo_riqueza$lambda.se),
+          lower.tail = FALSE) |> 
+      (\(x){
+        
+        dplyr::if_else(x < 0.01,
+                       "< 0.01",
+                       paste0("= ",
+                              x |> 
+                                round(2) |> 
+                                as.character()))
+      })(),
+    ", AIC = ",
+    modelo_riqueza$AIC_lm.model |> round(2)))
+
+tabela_riqueza
+  
 # Dissimilaridade das comunidades ----
 
 ## Calcular a dissimilaridade global ----
