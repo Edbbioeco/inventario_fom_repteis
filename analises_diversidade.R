@@ -127,7 +127,11 @@ janela
 
 ### Calcular teste I de Moran ----
 
-spdep::moran.mc(grade$Richness, janela, nsim = 999)
+spdep::moran.mc(grade |> 
+                  dplyr::distinct(grade |> sf::st_geometry(), 
+                                  .keep_all = TRUE) %>%
+                  .$Richness, 
+                janela, nsim = 999)
 
 ## Calcular a regressão geográfica ----
 
