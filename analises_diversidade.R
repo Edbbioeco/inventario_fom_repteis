@@ -10,6 +10,8 @@ library(vegan)
 
 library(ggview)
 
+library(spdep)
+
 library(betapart)
 
 library(reshape2)
