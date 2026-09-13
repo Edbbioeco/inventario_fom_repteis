@@ -111,6 +111,16 @@ ggplot() +
 ggsave(filename = "riqueza_fom.png",
        height = 10, width = 12)
 
+## Calcular teste I de Moran para agrupamento espacial ----
+
+### Calcular janela ----
+
+janela <- grade |> 
+  spdep::poly2nb() |> 
+  spdep::nb2listw(style = "W")
+
+janela
+
 ## Dissimilaridade das comunidades ----
 
 ### Calcular a dissimilaridade global ----
