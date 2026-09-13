@@ -412,6 +412,32 @@ grade_modelos <- grade_modelos |>
 
 grade_modelos
 
+### Criar os modelos ----
+
+modelos_sar_dis <- purrr::map(
+  c("Jaccard", "Turnover", "Nestdeness"),
+  purrr::in_parallel(
+    
+    \(indice){
+      
+      spatialreg::errorsarlm(
+        indice ~ Longitude * Latitude, 
+        data = grade_modelos |> 
+          dplyr::mutate(dplyr::across(
+            .cols = dplyr::contains("tude"),
+            .fns = ~scale(.x, scale = FALSE)[,1])) |> 
+          dplyr::rename("indice" = indice), 
+        listw = janela
+      )
+      
+    }
+    
+  ),
+  .progress = TRUE) |> 
+  setNames(c("Jaccard", "Turnover", "Nestdeness"))
+
+modelos_sar_dis
+
 # Compartilhamento de espécies ----
 
 ## Calcular ----
