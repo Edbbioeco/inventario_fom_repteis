@@ -215,6 +215,8 @@ tabela_riqueza <- modelo_riqueza |>
     modelo_riqueza$AIC_lm.model |> round(2)))
 
 tabela_riqueza
+
+tabela_riqueza |> flextable::save_as_docx(path = "tabela_sts_riqueza.docx")
   
 # Dissimilaridade das comunidades ----
 
