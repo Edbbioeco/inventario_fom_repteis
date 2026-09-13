@@ -47,11 +47,9 @@ grade
 ggplot() +
   geom_sf(data = grade, color = "black")
 
-# Diversidade ----
+# Riqueza ----
 
-## Riqueza ----
-
-### Calcular riqueza ----
+## Calcular riqueza ----
 
 riq <- comp |> 
   tibble::column_to_rownames(var = "ID") |> 
@@ -63,7 +61,7 @@ riq <- comp |>
 
 riq
 
-### Adicionar as informações de riqueza na grade ----
+## Adicionar as informações de riqueza na grade ----
 
 grade <- grade |> 
   dplyr::left_join(riq, by = "ID") |> 
@@ -76,7 +74,7 @@ grade <- grade |>
 
 grade
 
-### Visualizar ----
+## Visualizar ----
 
 ggplot() +
   geom_sf(data = grade, 
@@ -175,9 +173,9 @@ modelo_riqueza
 
 modelo_riqueza |> summary()
 
-## Dissimilaridade das comunidades ----
+# Dissimilaridade das comunidades ----
 
-### Calcular a dissimilaridade global ----
+## Calcular a dissimilaridade global ----
 
 dis_global <- purrr::map_vec(
   1:3,
@@ -194,7 +192,7 @@ dis_global <- purrr::map_vec(
 
 dis_global
 
-### Calcular a dissimilaridade par-a-par ----
+## Calcular a dissimilaridade par-a-par ----
 
 dis_par <- purrr::map2_dfr(
   1:3,
@@ -226,7 +224,7 @@ dis_par <- purrr::map2_dfr(
 
 dis_par
 
-### Calcular a média por cada grid ----
+## Calcular a média por cada grid ----
 
 dis_par_trat <- dis_par |> 
   dplyr::summarise(dplyr::across(.cols = dplyr::where(is.numeric),
@@ -236,7 +234,7 @@ dis_par_trat <- dis_par |>
 
 dis_par_trat
 
-### Adicionar os valores de dissimilaridade ao shapefile da grade ----
+## Adicionar os valores de dissimilaridade ao shapefile da grade ----
 
 grade <- grade |> 
   dplyr::left_join(dis_par_trat,
@@ -251,7 +249,7 @@ grade <- grade |>
 
 grade
 
-### Mapas ----
+## Mapas ----
 
 mapas_dis <- purrr::map(
   c("Jaccard", "Turnover", "Nestdeness"),
@@ -304,9 +302,9 @@ mapas_dis
 ggsave(filename = "dissimilaridade_fom.png",
        height = 10, width = 20)
 
-## Compartilhamento de espécies ----
+# Compartilhamento de espécies ----
 
-### Calcular ----
+## Calcular ----
 
 spe_comp <- comp |> 
   tibble::column_to_rownames(var = "ID") |> 
@@ -320,7 +318,7 @@ spe_comp <- comp |>
 
 spe_comp
 
-### Adicionar os valores de dissimilaridade ao shapefile da grade ----
+## Adicionar os valores de dissimilaridade ao shapefile da grade ----
 
 grade <- grade |> 
   dplyr::left_join(spe_comp,
@@ -334,7 +332,7 @@ grade <- grade |>
 
 grade
 
-### Mapas ----
+## Mapas ----
 
 ggplot() +
   geom_sf(data = grade,
