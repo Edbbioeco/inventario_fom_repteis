@@ -398,6 +398,8 @@ moran_dis_flex <- moran_dis |>
 
 moran_dis_flex
 
+moran_dis_flex |> flextable::save_as_docx(path = "i_moran_indices.docx")
+
 # Compartilhamento de espécies ----
 
 ## Calcular ----
