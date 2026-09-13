@@ -443,6 +443,53 @@ modelos_sar_dis
 purrr::map(modelos_sar_dis,
            summary)
 
+### Tabela dos valores das estatísticas ----
+
+sts_sar_dis <- purrr::imap_dfr(
+  modelos_sar_dis,
+  \(modelo, indice){
+    
+    modelo |> 
+      broom::tidy() |> 
+      dplyr::slice(2:4) |> 
+      dplyr::rename("Predictor" = 1,
+                    "z" = 4,
+                    "p" = 5) |> 
+      dplyr::mutate(estimate = estimate |> round(4),
+                    std.error = std.error |> round(4),
+                    z = z |> round(2),
+                    p = dplyr::case_when(p < 0.01 ~ "< 0.01",
+                                         .default = p |>
+                                           round(2) |> 
+                                           as.character()),
+                    λ = modelo$lambda |> round(2),
+                    z = (modelo$lambda / modelo$lambda.se) |> round(2),
+                    `λ p` =  pnorm((modelo$lambda / modelo$lambda.se),
+                                  lower.tail = FALSE) |> 
+                      (\(x){
+                        
+                        dplyr::if_else(x < 0.01,
+                                       "< 0.01",
+                                       paste0("= ",
+                                              x |> 
+                                                round(2) |> 
+                                                as.character()))
+                      })(),
+                    AIC = modelo$AIC_lm.model |> round(2)) |> 
+      tidyr::unite(col = "β ± SE",
+                   sep = " ± ",
+                   2:3) |> 
+      dplyr::mutate(Index = indice,
+                    .before = Predictor)
+    
+    },
+  .progress = TRUE) |> 
+  flextable::flextable() |> 
+  flextable::align(align = "center", part = "all") |> 
+  flextable::width(j = 3, width = 1.5)
+
+sts_sar_dis
+
 # Compartilhamento de espécies ----
 
 ## Calcular ----
