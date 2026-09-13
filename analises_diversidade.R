@@ -438,6 +438,11 @@ modelos_sar_dis <- purrr::map(
 
 modelos_sar_dis
 
+### Estatísticas do modelo ----
+
+purrr::map(modelos_sar_dis,
+           summary)
+
 # Compartilhamento de espécies ----
 
 ## Calcular ----
