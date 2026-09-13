@@ -16,6 +16,8 @@ library(spatialreg)
 
 library(broom)
 
+library(flextable)
+
 library(betapart)
 
 library(reshape2)
