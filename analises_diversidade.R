@@ -164,7 +164,10 @@ cor(scale(grade_modelos$Longitude, scale = FALSE)[,1],
 
 modelo_riqueza <- spatialreg::errorsarlm(
   Richness ~ Longitude * Latitude, 
-  data = grade_modelos, 
+  data = grade_modelos |> 
+    dplyr::mutate(dplyr::across(
+      .cols = dplyr::contains("tude"),
+      .fns = ~scale(.x, scale = FALSE)[,1])), 
   listw = janela
 )
 
