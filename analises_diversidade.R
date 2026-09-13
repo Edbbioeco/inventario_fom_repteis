@@ -490,6 +490,8 @@ sts_sar_dis <- purrr::imap_dfr(
 
 sts_sar_dis
 
+sts_sar_dis |> flextable::save_as_docx(path = "tabela_sts_dissimilaridade.docx")
+
 # Compartilhamento de espécies ----
 
 ## Calcular ----
