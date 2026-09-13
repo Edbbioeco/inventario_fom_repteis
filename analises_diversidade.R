@@ -388,6 +388,16 @@ moran_dis <- purrr::map(c("Jaccard", "Turnover", "Nestdeness"),
 
 moran_dis
 
+### Criar tabela flextable ----
+
+moran_dis_flex <- moran_dis |> 
+  dplyr::mutate(`Moran's I` = `Moran's I` |> round(2)) |> 
+  flextable::flextable() |> 
+  flextable::align(align = "center", part = "all") |> 
+  flextable::width(j = 2, width = 1.25)
+
+moran_dis_flex
+
 # Compartilhamento de espécies ----
 
 ## Calcular ----
