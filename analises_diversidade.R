@@ -118,6 +118,8 @@ ggsave(filename = "riqueza_fom.png",
 ### Calcular janela ----
 
 janela <- grade |> 
+  dplyr::distinct(grade |> sf::st_geometry(), 
+                  .keep_all = TRUE) |> 
   spdep::poly2nb() |> 
   spdep::nb2listw(style = "W")
 
