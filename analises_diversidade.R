@@ -463,8 +463,8 @@ sts_sar_dis <- purrr::imap_dfr(
                                            round(2) |> 
                                            as.character()),
                     λ = modelo$lambda |> round(2),
-                    z = (modelo$lambda / modelo$lambda.se) |> round(2),
-                    `λ p` =  pnorm((modelo$lambda / modelo$lambda.se),
+                    `λ-z` = (modelo$lambda / modelo$lambda.se) |> round(2),
+                    `λ-p` =  pnorm((modelo$lambda / modelo$lambda.se),
                                   lower.tail = FALSE) |> 
                       (\(x){
                         
