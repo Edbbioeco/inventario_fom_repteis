@@ -150,7 +150,19 @@ grade_modelos <- grade |>
                                    "Latitude" = 2))
 
 grade_modelos
-  
+
+### Calcular Modelo de Erro Espacial ----
+
+modelo_riqueza <- spatialreg::errorsarlm(
+  Richness ~ Longitude * Latitude, 
+  data = grade_modelos, 
+  listw = janela
+)
+
+modelo_riqueza
+
+modelo_riqueza |> summary()
+
 ## Dissimilaridade das comunidades ----
 
 ### Calcular a dissimilaridade global ----
