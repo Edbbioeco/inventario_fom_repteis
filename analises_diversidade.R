@@ -14,6 +14,8 @@ library(spdep)
 
 library(spatialreg)
 
+library(broom)
+
 library(betapart)
 
 library(reshape2)
