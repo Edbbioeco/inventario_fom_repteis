@@ -151,6 +151,15 @@ grade_modelos <- grade |>
 
 grade_modelos
 
+### Testar multicolinearidade ----
+
+cor(grade_modelos$Longitude, grade_modelos$Latitude)
+
+cor(grade_modelos$Longitude, grade_modelos$Longitude * grade_modelos$Latitude)
+
+cor(scale(grade_modelos$Longitude, scale = FALSE)[,1], 
+    scale(grade_modelos$Longitude, scale = FALSE)[,1] * scale(grade_modelos$Latitude, scale = FALSE)[,1])
+
 ### Calcular Modelo de Erro Espacial ----
 
 modelo_riqueza <- spatialreg::errorsarlm(
