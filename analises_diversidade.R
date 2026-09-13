@@ -351,6 +351,43 @@ mapas_dis
 ggsave(filename = "dissimilaridade_fom.png",
        height = 10, width = 20)
 
+## Teste I de Moran ----
+
+## Calcular I de Moran para cada índice ----
+
+moran_dis <- purrr::map(c("Jaccard", "Turnover", "Nestdeness"),
+           purrr::in_parallel(
+             
+             \(indice){
+               
+               spdep::moran.mc(grade |> 
+                                 dplyr::distinct(grade |> sf::st_geometry(), 
+                                                 .keep_all = TRUE) |> 
+                                 dplyr::pull(indice), 
+                               janela, nsim = 999)
+               
+               }
+             
+             ),
+           .progress = TRUE) |> 
+  setNames(c("Jaccard", "Turnover", "Nestdeness")) |> 
+  purrr::imap_dfr(
+    \(teste, indice){
+      
+      tibble::tibble(Index = indice,
+                     "Moran's I" = teste$statistic,
+                     "Rank" = teste$parameter,
+                     "p" = teste$p.value)
+      
+      },
+    .progress = TRUE) |> 
+  dplyr::mutate(p = dplyr::case_when(
+    p < 0.01 ~ "< 0.01",
+    .default = p |> as.character()
+  ))
+
+moran_dis
+
 # Compartilhamento de espécies ----
 
 ## Calcular ----
