@@ -15,6 +15,7 @@ comp <- purrr::map_dfr(
     "specieslink", 
     "sibbr", 
     "levantamento",
+    "inaturalist",
     "herpetohelp"), 
   \(registro){
     
@@ -34,4 +35,11 @@ comp |> dplyr::glimpse()
 
 ## Montar a tabela ----
 
-comp
+comp |> 
+  dplyr::select(-c(1, 4)) |> 
+  dplyr::mutate(Source = Source |> stringr::str_to_title()) |> 
+  dplyr::group_by(Family, Especies) |>  
+  dplyr::summarise(Source = paste(unique(Source), collapse = ", "), 
+                   .groups = "drop") |> 
+  as.data.frame() |> 
+  view()
