@@ -156,54 +156,39 @@ sps_id <- sps_trat |>
       .default = Especies
     ),
     Family = dplyr::case_when(
-      Especies |> stringr::str_detect(
-        c("Acanthochelys", 
-          "Hydromedusa",
-          "Phrynops")) ~ "Chelidae",
-      Especies |> stringr::str_detect("Trachemys") ~ "Emydidae",
+      Especies |> 
+        stringr::str_detect("Acanthochelys|Hydromedusa|Phrynops") ~ "Chelidae",
+      Especies |> 
+        stringr::str_detect("Trachemys") ~ "Emydidae",
       Especies |> 
         stringr::str_detect("Amerotyphlops") ~ "Typhlopidae",
       Especies |> 
         stringr::str_detect("Liotyphlops beui") ~ "Anomalepididae",
       Especies |> 
-        stringr::str_detect(
-          c("Amphisbaena",
-            "Leposternon")) ~ "Amphisbaenidae",
+        stringr::str_detect("Amphisbaena|Leposternon") ~ "Amphisbaenidae",
       Especies |> 
         stringr::str_detect("Hemidactylus") ~ "Gekkonidae",
       Especies |> 
-        stringr::str_detect(
-          c("Contomastix", 
-            "Salvator",
-            "Teius oculatus")) ~ "Teiidae",
+        stringr::str_detect("Contomastix|Salvator|Teius oculatus") ~ "Teiidae",
       Especies |> 
-        stringr::str_detect(
-          c("Cercosaura", 
-            "Colobodactylus",
-            "Mesotes", 
-            "Pantodactylus",
-            "Placosoma")) ~ "Gymnophthalmidae",
-      Especies |> stringr::str_detect("Notomabuya") ~ "Scincidae",
-      Especies |> stringr::str_detect(
-        c("Diploglossus", 
-          "Ophiodes")) ~ "Diploglossidae",
-      Especies |> stringr::str_detect(
-        c("Enyalius",
-          "Urostrophus")) ~ "Leiosauridae",
-      Especies |> stringr::str_detect("Tropidurus") ~ "Tropiduridae",
-      Especies |> stringr::str_detect(
-        c("Epicrates",
-          "Eunectes")) ~ "Boidae",
-      Especies |> stringr::str_detect(
-        c("Bothrops",
-          "Crotalus")) ~ "Viperidae",
-      Especies |> stringr::str_detect("Micrurus") ~ "Elapidae",
-      Especies |> stringr::str_detect(
-        c("Chironius",
-          "Leptophis", 
-          "Spilotess",
-          "Tropidodryas")) ~ "Colubridae",
-      .default =  ~ "Dipsadidae"  
+        stringr::str_detect("Cercosaura|Colobodactylus|Mesotes|Pantodactylus|Placosoma") ~ "Gymnophthalmidae",
+      Especies |> 
+        stringr::str_detect("Notomabuya") ~ "Scincidae",
+      Especies |> 
+        stringr::str_detect("Diploglossus|Ophiodes") ~ "Diploglossidae",
+      Especies |> 
+        stringr::str_detect("Enyalius|Urostrophus") ~ "Leiosauridae",
+      Especies |> 
+        stringr::str_detect("Tropidurus") ~ "Tropiduridae",
+      Especies |> 
+        stringr::str_detect("Epicrates|Eunectes") ~ "Boidae",
+      Especies |> 
+        stringr::str_detect("Bothrops|Crotalus") ~ "Viperidae",
+      Especies |> 
+        stringr::str_detect("Micrurus") ~ "Elapidae",
+      Especies |> 
+        stringr::str_detect("Chironius|Leptophis|Spilotess|Tropidodryas") ~ "Colubridae",
+      .default = "Dipsadidae"  
     ),
     Especies = Especies |> stringr::str_trim()
   ) |> 
