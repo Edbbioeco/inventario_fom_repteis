@@ -76,6 +76,17 @@ gbif_sf_fom |>
 gbif_sf_fom <- gbif_sf_fom |> 
   dplyr::mutate(species = dplyr::case_match(
     species,
+    "Bothrops alternatus neuw." ~ "Bothrops alternatus",
+    "Placosoma glabelum" ~ "Placosoma glabelum",
+    "Ecpleopus gaudichaudi" ~ "Ecpleopus gaudichaudii",
+    "Micrurus silvae" ~"Micrurus silviae",
+    "Xenodon merremii" ~ "Xenodon merremii",
+    "Rachidelus brazili" ~ "Rhachidelus brazili",
+    "Paraphimophis rustica" ~ "Paraphimophis rusticus",
+    "Oxyrophus rhombifer" ~ "Oxyrhopus rhombifer",
+    "Xenodon merremi" ~ "Xenodon merremi",
+    "Philodryas olfersi" ~ "Philodryas olfersi",
+    "Leposternon microcephalum" ~ "Leposternon microcephalus",
     "Tomodon dorsatum" ~ "Tomodon dorsatus",
     "Tupinambis merianae" ~ "Salvator marianae",
     "Mabuya frenata" ~ "Notomabuya frenata",
@@ -96,12 +107,14 @@ gbif_sf_fom <- gbif_sf_fom |>
     "Atractus taeniatus" ~ "Atractus paraguayensis",
     "Crotalus durissus terrificus" ~ "Crotalus durissus",
     "Echinanthera affinis" ~ "Dibernardia affinis",
-    "Bothrops newwiedi" ~ "Bothrops neuwiedi",
+    "Bothrops newwiedi" ~ "Bothrops neuwiedii",
     "Amphisbaena darwini" ~ "Amphisbaena darwinii",
     "Anops kingii" ~ "Amphisbaena kingii",
     "Amphisbaena mertensi" ~ "Amphisbaena mertensii",
-    "Leposternon microcephalum" ~ "Leposternon microcephalus",
-    c("Varanus salvator", "Tupinambis teguixin") ~ "Salvator merianae",
+    c("Varanus salvator", 
+      "Tupinambis teguixin",
+      "Tupinambis teguixim",
+      "Salvator marianae") ~ "Salvator merianae",
     "Bothrops trigemina" ~ "Bothrops alternatus",
     "Bothrops neuwiedi paranaensis" ~ "Bothrops pubescens",
     c("Anolis philopunctatus", 
@@ -115,7 +128,7 @@ gbif_sf_fom <- gbif_sf_fom |>
     family == "Varanidae" ~ "Teiidae",
     .default = family
   ),
-  species = especies |> stringr::str_trim()) |> 
+  species = species |> stringr::str_trim()) |> 
   dplyr::filter(!species |> is.na() &
                   !species |> stringr::str_detect("sp|sp.|cf|cf.") &
                   !species |> 
