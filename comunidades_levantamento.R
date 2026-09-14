@@ -156,86 +156,54 @@ sps_id <- sps_trat |>
       .default = Especies
     ),
     Family = dplyr::case_when(
-      Especies %in% c("Acanthochelys spixii", 
-                      "Hydromedusa tectifera",
-                      "Phrynops geoffroanus", 
-                      "Phrynops williamsi",
-                      "Phrynops hilarii") ~ "Chelidae",
-      
-      Especies %in% c("Trachemys scripta", 
-                      "Trachemys dorbigni") ~ "Emydidae",
-      
-      Especies == "Amerotyphlops brongersmianus" ~ "Typhlopidae",
-      
-      Especies %in% c("Liotyphlops beui", 
-                      "Liotyphlops ternetzii") ~ "Anomalepididae",
-      
-      Especies %in% c("Amphisbaena darwinii", 
-                      "Amphisbaena dubia",
-                      "Amphisbaena mertensi", 
-                      "Amphisbaena prunicolor",
-                      "Amphisbaena trachura", 
-                      "Amphisbaena roberti",
-                      "Leposternon microcephalum") ~ "Amphisbaenidae",
-      
-      Especies == "Hemidactylus mabouia" ~ "Gekkonidae",
-      
-      Especies %in% c("Contomastix vacariensis", 
-                      "Salvator merianae",
-                      "Teius oculatus") ~ "Teiidae",
-      
-      Especies %in% c("Cercosaura schreibersii", 
-                      "Colobodactylus taunayi",
-                      "Mesotes strigatus", 
-                      "Pantodactylus schreibersii",
-                      "Placosoma glabellum") ~ "Gymnophthalmidae",
-      
-      Especies == "Notomabuya frenata" ~ "Scincidae",
-      
-      Especies %in% c("Diploglossus fasciatus", 
-                      "Ophiodes fragilis",
-                      "Ophiodes striatus") ~ "Diploglossidae",
-      
-      Especies %in% c("Enyalius iheringii", 
-                      "Enyalius perditus",
-                      "Urostrophus grilli", 
-                      "Urostrophus vautieri") ~ "Leiosauridae",
-      
-      Especies %in% c("Tropidurus catalanensis", 
-                      "Tropidurus torquatus") ~ "Tropiduridae",
-      
-      Especies %in% c("Epicrates crassus", 
-                      "Eunectes murinus",
-                      "Eunectes notaeus") ~ "Boidae",
-      
-      Especies %in% c("Bothrops alternatus", 
-                      "Bothrops diporus", 
-                      "Bothrops jararaca",
-                      "Bothrops jararacussu", 
-                      "Bothrops neuwiedi", 
-                      "Bothrops cotiara",
-                      "Bothrops moojeni", 
-                      "Bothrops pauloensis",
-                      "Crotalus durissus") ~ "Viperidae",
-      
-      Especies %in% c("Micrurus altirostris", 
-                      "Micrurus carvalhoi",
-                      "Micrurus corallinus", 
-                      "Micrurus frontalis") ~ "Elapidae",
-      
-      Especies %in% c("Chironius bicarinatus", 
-                      "Chironius exoletus", 
-                      "Chironius foveatus",
-                      "Chironius flavolineatus", 
-                      "Chironius laevicollis",
-                      "Chironius multiventris", 
-                      "Chironius gouveai",
-                      "Leptophis marginatus", 
-                      "Spilotes pullatus",
-                      "Tropidodryas serra", 
-                      "Tropidodryas striaticeps") ~ "Colubridae",
-      
-      TRUE ~ "Dipsadidae"  
+      Especies |> stringr::str_detect(
+        c("Acanthochelys", 
+          "Hydromedusa",
+          "Phrynops")) ~ "Chelidae",
+      Especies |> stringr::str_detect("Trachemys") ~ "Emydidae",
+      Especies |> 
+        stringr::str_detect("Amerotyphlops") ~ "Typhlopidae",
+      Especies |> 
+        stringr::str_detect("Liotyphlops beui") ~ "Anomalepididae",
+      Especies |> 
+        stringr::str_detect(
+          c("Amphisbaena",
+            "Leposternon")) ~ "Amphisbaenidae",
+      Especies |> 
+        stringr::str_detect("Hemidactylus") ~ "Gekkonidae",
+      Especies |> 
+        stringr::str_detect(
+          c("Contomastix", 
+            "Salvator",
+            "Teius oculatus")) ~ "Teiidae",
+      Especies |> 
+        stringr::str_detect(
+          c("Cercosaura", 
+            "Colobodactylus",
+            "Mesotes", 
+            "Pantodactylus",
+            "Placosoma")) ~ "Gymnophthalmidae",
+      Especies |> stringr::str_detect("Notomabuya") ~ "Scincidae",
+      Especies |> stringr::str_detect(
+        c("Diploglossus", 
+          "Ophiodes")) ~ "Diploglossidae",
+      Especies |> stringr::str_detect(
+        c("Enyalius",
+          "Urostrophus")) ~ "Leiosauridae",
+      Especies |> stringr::str_detect("Tropidurus") ~ "Tropiduridae",
+      Especies |> stringr::str_detect(
+        c("Epicrates",
+          "Eunectes")) ~ "Boidae",
+      Especies |> stringr::str_detect(
+        c("Bothrops",
+          "Crotalus")) ~ "Viperidae",
+      Especies |> stringr::str_detect("Micrurus") ~ "Elapidae",
+      Especies |> stringr::str_detect(
+        c("Chironius",
+          "Leptophis", 
+          "Spilotess",
+          "Tropidodryas")) ~ "Colubridae",
+      .default =  ~ "Dipsadidae"  
     ),
     Especies = Especies |> stringr::str_trim()
   ) |> 
