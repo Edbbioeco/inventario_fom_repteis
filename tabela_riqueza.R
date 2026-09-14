@@ -10,10 +10,28 @@ library(flextable)
 
 ## Importar ----
 
-comp <- readxl::read_xlsx("comunidades_taxonomicas.xlsx")
+comp <- purrr::map_dfr(
+  c("gbif", 
+    "specieslink", 
+    "sibbr", 
+    "levantamento",
+    "herpetohelp"), 
+  \(registro){
+    
+    readxl::read_xlsx(paste0("./registros_", registro, ".xlsx")) |> 
+      dplyr::mutate(Source = registro)
+    
+  },
+  .progress = TRUE)
 
 ## Visualizar ----
 
 comp
 
 comp |> dplyr::glimpse()
+
+# Tabela ----
+
+## Montar a tabela ----
+
+comp
