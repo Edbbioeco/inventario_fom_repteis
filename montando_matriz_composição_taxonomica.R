@@ -15,6 +15,7 @@ comunidades <- purrr::map_dfr(
     "specieslink", 
     "sibbr", 
     "levantamento",
+    "inaturalist",
     "herpetohelp"), 
   \(registro){
     
