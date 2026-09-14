@@ -151,9 +151,9 @@ sibbr_sf_fom <- sibbr_sf_fom |>
   ),
   family = dplyr::case_when(
     family == "Varanidae" ~ "Teiidae",
-    .default = family,
-    species = especies |> stringr::str_trim()
-  )) |> 
+    .default = family
+  ),
+    species = especies |> stringr::str_trim()) |> 
   dplyr::filter(!species |> is.na() &
                   !species |> stringr::str_detect("sp|sp.|cf|cf.") &
                   !species |> 
