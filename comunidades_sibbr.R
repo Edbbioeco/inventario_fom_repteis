@@ -153,7 +153,7 @@ sibbr_sf_fom <- sibbr_sf_fom |>
     family == "Varanidae" ~ "Teiidae",
     .default = family
   ),
-    species = especies |> stringr::str_trim()) |> 
+  species = species |> stringr::str_trim()) |> 
   dplyr::filter(!species |> is.na() &
                   !species |> stringr::str_detect("sp|sp.|cf|cf.") &
                   !species |> 
