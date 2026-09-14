@@ -114,9 +114,10 @@ gbif_sf_fom <- gbif_sf_fom |>
   family = dplyr::case_when(
     family == "Varanidae" ~ "Teiidae",
     .default = family
-  )) |> 
+  ),
+  species = especies |> stringr::str_trim()) |> 
   dplyr::filter(!species |> is.na() &
-                  !species |> stringr::str_detect("sp|sp.") &
+                  !species |> stringr::str_detect("sp|sp.|cf|cf.") &
                   !species |> 
                   stringr::str_trim() |> 
                   stringr::str_count("\\S+") == 1)
