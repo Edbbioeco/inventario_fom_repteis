@@ -97,17 +97,23 @@ gbif_sf_fom <- gbif_sf_fom |>
     "Crotalus durissus terrificus" ~ "Crotalus durissus",
     "Echinanthera affinis" ~ "Dibernardia affinis",
     "Bothrops newwiedi" ~ "Bothrops neuwiedi",
-    c("Bothrops trigemina", 
-      "Anolis philopunctatus", 
+    "Amphisbaena darwini" ~ "Amphisbaena darwinii",
+    "Anops kingii" ~ "Amphisbaena kingii",
+    "Amphisbaena mertensi" ~ "Amphisbaena mertensii",
+    "Leposternon microcephalum" ~ "Leposternon microcephalus",
+    c("Varanus salvator", "Tupinambis teguixin") ~ "Salvator merianae",
+    "Bothrops trigemina" ~ "Bothrops alternatus",
+    "Bothrops neuwiedi paranaensis" ~ "Bothrops pubescens",
+    c("Anolis philopunctatus", 
       "Lygophis lineatus", 
-      "Tupinambis teguixin", 
-      "Bothrops neuwiedi paranaensis", 
-      "Heterodactylus imbricatus", 
       "Dipsas indica", 
-      "Boiruna maculata", 
       "Clelia plúmbea", 
       "Xenodon biligonigerus") ~ NA_character_,
     .default = species
+  ),
+  family = dplyr::case_when(
+    family == "Varanidae" ~ "Teiidae",
+    .default = family
   )) |> 
   dplyr::filter(!species |> is.na() &
                   !species |> stringr::str_detect("sp|sp.") &
