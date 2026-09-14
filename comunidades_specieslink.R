@@ -122,10 +122,11 @@ specieslink_sf_fom <- specieslink_sf_fom |>
   ),
   family = dplyr::case_when(
     family == "Varanidae" ~ "Teiidae",
-    .default = family
+    .default = family,
+    scientificname = scientificname |> stringr::str_trim()
   )) |> 
   dplyr::filter(!scientificname |> is.na() &
-                  !scientificname |> stringr::str_detect("sp|sp.") &
+                  !scientificname |> stringr::str_detect("sp|sp.|cf|cf.") &
                   !scientificname |> 
                   stringr::str_trim() |> 
                   stringr::str_count("\\S+") == 1)
