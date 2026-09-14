@@ -79,7 +79,6 @@ gbif_sf_fom <- gbif_sf_fom |>
     "Philodryas aestivus" ~ "Philodryas aestiva",
     "Placosoma glabelum" ~ "Placosoma glabellum",
     "Bothrops alternatus neuw." ~ "Bothrops alternatus",
-    "Placosoma glabelum" ~ "Placosoma glabelum",
     "Ecpleopus gaudichaudi" ~ "Ecpleopus gaudichaudii",
     "Micrurus silvae" ~"Micrurus silviae",
     "Xenodon merremi" ~ "Xenodon merremii",
