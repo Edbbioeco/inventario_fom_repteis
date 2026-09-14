@@ -191,7 +191,8 @@ sps_id <- sps_trat |>
                       "Tropidodryas striaticeps") ~ "Colubridae",
       
       TRUE ~ "Dipsadidae"  
-    )
+    ),
+    Especies = Especies |> stringr::str_trim()
   ) |> 
   dplyr::relocate(c(ID, Family), .before = 1) |> 
   dplyr::filter(!ID |> is.na())
