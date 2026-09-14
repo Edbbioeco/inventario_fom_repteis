@@ -122,9 +122,9 @@ specieslink_sf_fom <- specieslink_sf_fom |>
   ),
   family = dplyr::case_when(
     family == "Varanidae" ~ "Teiidae",
-    .default = family,
-    scientificname = scientificname |> stringr::str_trim()
-  )) |> 
+    .default = family
+  ),
+    scientificname = scientificname |> stringr::str_trim()) |> 
   dplyr::filter(!scientificname |> is.na() &
                   !scientificname |> stringr::str_detect("sp|sp.|cf|cf.") &
                   !scientificname |> 
@@ -148,3 +148,4 @@ specieslink_registros
 ## Exportando ----
 
 specieslink_registros |> writexl::write_xlsx("registros_specieslink.xlsx")
+
