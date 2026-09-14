@@ -85,10 +85,21 @@ inaturalist_sf_fom |>
 inaturalist_sf_fom <- inaturalist_sf_fom |> 
   dplyr::mutate(scientific_name = dplyr::case_match(
     scientific_name,
+    "Bothrops alternatus neuw." ~ "Bothrops alternatus",
+    "Placosoma glabelum" ~ "Placosoma glabelum",
+    "Ecpleopus gaudichaudi" ~ "Ecpleopus gaudichaudii",
+    "Micrurus silvae" ~"Micrurus silviae",
+    "Xenodon merremii" ~ "Xenodon merremii",
+    "Rachidelus brazili" ~ "Rhachidelus brazili",
+    "Paraphimophis rustica" ~ "Paraphimophis rusticus",
+    "Oxyrophus rhombifer" ~ "Oxyrhopus rhombifer",
+    "Xenodon merremi" ~ "Xenodon merremi",
+    "Philodryas olfersi" ~ "Philodryas olfersi",
+    "Leposternon microcephalum" ~ "Leposternon microcephalus",
     "Tomodon dorsatum" ~ "Tomodon dorsatus",
     "Tupinambis merianae" ~ "Salvator marianae",
     "Mabuya frenata" ~ "Notomabuya frenata",
-    "Anisiolepis grilli" ~ "Urostrophus grilli",
+    "Anisiolepis grilli"  ~ "Urostrophus grilli",
     "Mabuya dorsivittata" ~ "Aspronema dorsivittatum",
     "Sibynomorphus neuwiedi" ~ "Dipsas neuwiedi",
     "Liotyphlops beui" ~ "Liotyphlops ternetzii",
@@ -99,27 +110,35 @@ inaturalist_sf_fom <- inaturalist_sf_fom |>
     "Liophis miliaris" ~ "Erythrolamprus miliaris",
     "Sibynomorphus mikanii" ~ "Dipsas mikanii",
     "Liophis jaegeri" ~ "Erythrolamprus jaegeri",
-    "Phalotris iheringii"  ~ "Phalotris lemniscatus",
+    "Phalotris iheringii" ~ "Phalotris lemniscatus",
     "Thamnodynastes hypoconia" ~ "Dryophylax hypoconia",
     "Thamnodynastes strigatus" ~ "Mesotes strigatus",
     "Atractus taeniatus" ~ "Atractus paraguayensis",
     "Crotalus durissus terrificus" ~ "Crotalus durissus",
     "Echinanthera affinis" ~ "Dibernardia affinis",
-    "Bothrops newwiedi" ~ "Bothrops neuwiedi",
-    c("Bothrops trigemina", 
-      "Anolis philopunctatus", 
+    "Bothrops newwiedi" ~ "Bothrops neuwiedii",
+    "Amphisbaena darwini" ~ "Amphisbaena darwinii",
+    "Anops kingii" ~ "Amphisbaena kingii",
+    "Amphisbaena mertensi" ~ "Amphisbaena mertensii",
+    c("Varanus salvator", 
+      "Tupinambis teguixin",
+      "Tupinambis teguixim",
+      "Salvator marianae") ~ "Salvator merianae",
+    "Bothrops trigemina" ~ "Bothrops alternatus",
+    "Bothrops neuwiedi paranaensis" ~ "Bothrops pubescens",
+    c("Anolis philopunctatus", 
       "Lygophis lineatus", 
-      "Tupinambis teguixin", 
-      "Bothrops neuwiedi paranaensis", 
-      "Heterodactylus imbricatus", 
       "Dipsas indica", 
-      "Boiruna maculata", 
       "Clelia plúmbea", 
-      "Xenodon biligonigerus")      ~ NA_character_,
+      "Xenodon biligonigerus") ~ NA_character_,
     .default = scientific_name
-  )) |> 
+  ),
+  taxon_family_name = dplyr::case_when(
+    taxon_family_name == "Varanidae" ~ "Teiidae",
+    .default = taxon_family_name),
+  scientific_name = scientific_name |> stringr::str_trim()) |> 
   dplyr::filter(!scientific_name |> is.na() &
-                  !scientific_name |> stringr::str_detect("sp|sp.") &
+                  !scientific_name |> stringr::str_detect("sp|sp.|cf|cf.") &
                   !scientific_name |> 
                   stringr::str_trim() |> 
                   stringr::str_count("\\S+") == 1)
