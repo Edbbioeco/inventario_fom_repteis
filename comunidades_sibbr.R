@@ -168,25 +168,25 @@ sibbr_sf_fom <- sibbr_sf_fom |>
   ),
   species = species |> str_replace("Sibynomorphus", "Dipsas"),
   family = dplyr::case_when(
+    species |> 
+      stringr::str_detect("Enyalius") ~ "Leiosauridae",
+    species |> 
+      stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
+    species |> 
+      stringr::str_detect("Notomabuya") ~ "Scincidae",
+    species |> 
+      stringr::str_detect("Ophiodes") ~ "Diploglossidae",
+    species |> 
+      stringr::str_detect("Palusophis") ~ "Colubridae",
+    species |> 
+      stringr::str_detect("Podocnemis") ~ "Podocnemididae",
+    species |> 
+      str_detect(
+        "Apostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon|Lygophis") ~ "Dipsadidae",
     family == "Varanidae" ~ "Teiidae",
     family|> stringr::str_detect("Xenodon") ~ "Dipsadidae",
     family |> stringr::str_detect("inae") ~ family |> 
       stringr::str_replace("inae", "idae"),
-    family |> 
-      stringr::str_detect("Enyalius") ~ "Leiosauridae",
-    family |> 
-      stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
-    family |> 
-      stringr::str_detect("Notomabuya") ~ "Scincidae",
-    family |> 
-      stringr::str_detect("Ophiodes") ~ "Diploglossidae",
-    family |> 
-      stringr::str_detect("Palusophis") ~ "Colubridae",
-    family |> 
-      stringr::str_detect("Podocnemis") ~ "Podocnemididae",
-    species |> 
-      str_detect(
-        "Aapostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon") ~ "Dipsadidae",
     family == "Varanidae" ~ "Teiidae",
     .default = family
   ),
