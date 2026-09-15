@@ -228,6 +228,11 @@ sps_id <- sps_trat |>
 
 sps_id
 
+## Checando a matriz ----
+
+sps_id |> 
+  dplyr::filter(Especies |> is.na() | Family |> is.na())
+
 ## Exportando ----
 
 sps_id |> writexl::write_xlsx("registros_levantamento.xlsx")
