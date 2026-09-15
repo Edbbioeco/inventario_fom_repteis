@@ -70,3 +70,11 @@ tabela_flex
 ## Exportar tabela ----
 
 tabela_flex |> flextable::save_as_docx(path = "tabela_riqueza.docx")
+
+## Estatísticas descritivas ----
+
+### Riqueza por ordem ----
+
+tabela |> 
+  dplyr::summarise(riqueza = dplyr::n(),
+                   .by = Order)
