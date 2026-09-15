@@ -172,7 +172,7 @@ sps_id <- sps_trat |>
       Especies |> 
         stringr::str_detect("Amerotyphlops") ~ "Typhlopidae",
       Especies |> 
-        stringr::str_detect("Liotyphlops beui") ~ "Anomalepididae",
+        stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
       Especies |> 
         stringr::str_detect("Amphisbaena|Leposternon") ~ "Amphisbaenidae",
       Especies |> 
@@ -196,29 +196,27 @@ sps_id <- sps_trat |>
       Especies |> 
         stringr::str_detect("Micrurus") ~ "Elapidae",
       Especies |> 
-        stringr::str_detect("Chironius|Leptophis|Spilotess|Tropidodryas") ~ "Colubridae",
+        stringr::str_detect("Chironius|Leptophis|Spilotess|Tropidodryas|Palusophis|Spilotes") ~ "Colubridae",
       .default = "Dipsadidae"  
     ),
     Family = dplyr::case_when(
-      Family == "Varanidae" ~ "Teiidae",
-      Family|> stringr::str_detect("Xenodon") ~ "Dipsadidae",
-      Family |> stringr::str_detect("inae") ~ Family |> 
-        stringr::str_replace("inae", "idae"),
-      Family |> 
+      Especies |> 
         stringr::str_detect("Enyalius") ~ "Leiosauridae",
-      Family |> 
+      Especies |> 
         stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
-      Family |> 
+      Especies |> 
         stringr::str_detect("Notomabuya") ~ "Scincidae",
-      Family |> 
+      Especies |> 
         stringr::str_detect("Ophiodes") ~ "Diploglossidae",
-      Family |> 
-        stringr::str_detect("Palusophis") ~ "Colubridae",
-      Family |> 
+      Especies |> 
         stringr::str_detect("Podocnemis") ~ "Podocnemididae",
       Especies |> 
         str_detect(
-          "Aapostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon") ~ "Dipsadidae",
+          "Apostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon|Lygophis") ~ "Dipsadidae",
+      Family == "Varanidae" ~ "Teiidae",
+      Family|> stringr::str_detect("Xenodon") ~ "Dipsadidae",
+      Family |> stringr::str_detect("inae") ~ Family |> 
+        stringr::str_replace("inae", "idae"),,
       .default = Family
     ),
     Especies = Especies |> stringr::str_trim()
@@ -236,3 +234,4 @@ sps_id |>
 ## Exportando ----
 
 sps_id |> writexl::write_xlsx("registros_levantamento.xlsx")
+
