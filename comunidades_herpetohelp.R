@@ -139,25 +139,25 @@ herpetohelp_sf_fom <- herpetohelp_sf_fom |>
   ),
   Espécie = Espécie |> str_replace("Sibynomorphus", "Dipsas"),
   Família = dplyr::case_when(
+    Espécie |> 
+      stringr::str_detect("Enyalius") ~ "Leiosauridae",
+    Espécie |> 
+      stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
+    Espécie |> 
+      stringr::str_detect("Notomabuya") ~ "Scincidae",
+    Espécie |> 
+      stringr::str_detect("Ophiodes") ~ "Diploglossidae",
+    Espécie |> 
+      stringr::str_detect("Palusophis") ~ "Colubridae",
+    Espécie |> 
+      stringr::str_detect("Podocnemis") ~ "Podocnemididae",
+    Espécie |> 
+      str_detect(
+        "Apostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon|Lygophis") ~ "Dipsadidae",
     Família == "Varanidae" ~ "Teiidae",
     Família|> stringr::str_detect("Xenodon") ~ "Dipsadidae",
     Família |> stringr::str_detect("inae") ~ Família |> 
       stringr::str_replace("inae", "idae"),
-    Família |> 
-      stringr::str_detect("Enyalius") ~ "Leiosauridae",
-    Família |> 
-      stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
-    Família |> 
-      stringr::str_detect("Notomabuya") ~ "Scincidae",
-    Família |> 
-      stringr::str_detect("Ophiodes") ~ "Diploglossidae",
-    Família |> 
-      stringr::str_detect("Palusophis") ~ "Colubridae",
-    Família |> 
-      stringr::str_detect("Podocnemis") ~ "Podocnemididae",
-    Espécie |> 
-      str_detect(
-        "Aapostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon") ~ "Dipsadidae",
     Família == "Varanidae" ~ "Teiidae",
     .default = Família),
   Espécie = Espécie |> stringr::str_trim()) |> 
