@@ -85,6 +85,7 @@ herpetohelp_sf_fom |>
 
 herpetohelp_sf_fom <- herpetohelp_sf_fom |> 
   dplyr::mutate(Espécie = dplyr::case_match(
+    Espécie,
     "Chelonoidis carbonaria" ~ "Chelonoidis carbonarius",
     "Philodryas aestivus" ~ "Philodryas aestiva",
     "Placosoma glabelum" ~ "Placosoma glabellum",
