@@ -53,6 +53,7 @@ tabela <- composicao |>
       c("Testudinidae", "Podocnemididae", "Chelidae", "Kinosternidae",
         "Emydidae", "Cheloniidae") ~ "Testudines",
       .default = "Squamata"),
-    .before = 1)
+    .before = 1) |> 
+  dplyr::arrange(Order, Family, Species)
 
 tabela
