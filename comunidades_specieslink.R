@@ -85,6 +85,7 @@ specieslink_sf_fom |>
 specieslink_sf_fom <- specieslink_sf_fom |> 
   dplyr::mutate(scientificname = dplyr::case_match(
     scientificname,
+    "Chelonoidis carbonaria" ~ "Chelonoidis carbonarius",
     "Philodryas aestivus" ~ "Philodryas aestiva",
     "Placosoma glabelum" ~ "Placosoma glabellum",
     "Bothrops alternatus neuw." ~ "Bothrops alternatus",
@@ -99,7 +100,7 @@ specieslink_sf_fom <- specieslink_sf_fom |>
     "Tomodon dorsatum" ~ "Tomodon dorsatus",
     "Tupinambis merianae" ~ "Salvator marianae",
     "Mabuya frenata" ~ "Notomabuya frenata",
-    "Anisiolepis grilli"  ~ "Urostrophus grilli",
+    c("Anisiolepis grilli", "Anisolepis grilli")  ~ "Urostrophus grilli",
     "Mabuya dorsivittata" ~ "Aspronema dorsivittatum",
     "Sibynomorphus neuwiedi" ~ "Dipsas neuwiedi",
     "Liotyphlops beui" ~ "Liotyphlops ternetzii",
@@ -116,7 +117,7 @@ specieslink_sf_fom <- specieslink_sf_fom |>
     "Atractus taeniatus" ~ "Atractus paraguayensis",
     "Crotalus durissus terrificus" ~ "Crotalus durissus",
     "Echinanthera affinis" ~ "Dibernardia affinis",
-    "Bothrops newwiedi" ~ "Bothrops neuwiedii",
+    "Bothrops neuwiedi" ~ "Bothrops neuwiedii",
     "Amphisbaena darwini" ~ "Amphisbaena darwinii",
     "Anops kingii" ~ "Amphisbaena kingii",
     "Amphisbaena mertensi" ~ "Amphisbaena mertensii",
