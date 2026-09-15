@@ -78,3 +78,10 @@ tabela_flex |> flextable::save_as_docx(path = "tabela_riqueza.docx")
 tabela |> 
   dplyr::summarise(riqueza = dplyr::n(),
                    .by = Order)
+
+### Riqueza por família ----
+
+tabela |> 
+  dplyr::summarise(riqueza = dplyr::n(),
+                   .by = Family) |> 
+  dplyr::arrange(riqueza |> dplyr::desc())
