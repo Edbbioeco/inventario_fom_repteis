@@ -66,3 +66,7 @@ tabela_flex <- tabela |>
   flextable::italic(j = 3, part = "body")
 
 tabela_flex
+
+## Exportar tabela ----
+
+tabela_flex |> flextable::save_as_docx(path = "tabela_riqueza.docx")
