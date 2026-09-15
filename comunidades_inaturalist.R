@@ -181,6 +181,11 @@ inaturalist_registros <- inaturalist_sf_fom |>
 
 inaturalist_registros
 
+## Checando a matriz ----
+
+inaturalist_registros |> 
+  dplyr::filter(Especies |> is.na() | Family |> is.na())
+
 ## Exportando ----
 
 inaturalist_registros |> writexl::write_xlsx("registros_inaturalist.xlsx")
