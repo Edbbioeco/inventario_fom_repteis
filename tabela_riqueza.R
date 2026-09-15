@@ -57,3 +57,12 @@ tabela <- composicao |>
   dplyr::arrange(Order, Family, Species)
 
 tabela
+
+## Criar a tabela flextable ----
+
+tabela_flex <- tabela |> 
+  flextable::flextable() |> 
+  flextable::align(align = "center", part = "all") |> 
+  flextable::italic(j = 3, part = "body")
+
+tabela_flex
