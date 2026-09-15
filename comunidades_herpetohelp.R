@@ -181,6 +181,11 @@ herpetohelp_registros <- herpetohelp_sf_fom |>
 
 herpetohelp_registros
 
+## Checando a matriz ----
+
+herpetohelp_registros |> 
+  dplyr::filter(Especies |> is.na() | Family |> is.na())
+
 ## Exportando ----
 
 herpetohelp_registros |> writexl::write_xlsx("registros_herpetohelp.xlsx")
