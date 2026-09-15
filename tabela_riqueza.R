@@ -10,7 +10,7 @@ library(flextable)
 
 ## Importar ----
 
-comp <- purrr::map_dfr(
+composicao <- purrr::map_dfr(
   c("gbif", 
     "specieslink", 
     "sibbr", 
@@ -27,22 +27,6 @@ comp <- purrr::map_dfr(
 
 ## Visualizar ----
 
-comp
+composicao
 
-comp |> dplyr::glimpse()
-
-# Tabela ----
-
-## Montar a tabela ----
-
-comp |> 
-  dplyr::select(-c(1, 4)) |> 
-  dplyr::mutate(Source = dplyr::case_match(
-    Source,
-    "gbif" ~ "GBIF",
-    "inaturalist" ~ "iNaturalist",
-    .default = Source |> stringr::str_to_title())) |> 
-  dplyr::group_by(Family, Especies) |>  
-  dplyr::summarise(Source = paste(unique(Source), collapse = ", "), 
-                   .groups = "drop") |> 
-  as.data.frame() 
+composicao |> dplyr::glimpse()
