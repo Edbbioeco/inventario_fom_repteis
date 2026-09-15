@@ -85,3 +85,10 @@ tabela |>
   dplyr::summarise(riqueza = dplyr::n(),
                    .by = Family) |> 
   dplyr::arrange(riqueza |> dplyr::desc())
+
+### Riqueza por família ----
+
+tabela |> 
+  dplyr::summarise(riqueza = Family |> dplyr::n_distinct(),
+                   .by = Order) |> 
+  dplyr::arrange(riqueza |> dplyr::desc())
