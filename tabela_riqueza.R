@@ -45,6 +45,7 @@ tabela <- composicao |>
   dplyr::group_by(Family, Especies) |>  
   dplyr::summarise(Source = paste(unique(Source), collapse = ", "), 
                    .groups = "drop") |> 
+  dplyr::rename("Species" = Especies) |> 
   dplyr::mutate(
     Order = dplyr::case_match(
       Family,
