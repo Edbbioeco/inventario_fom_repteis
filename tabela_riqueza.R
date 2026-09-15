@@ -44,6 +44,14 @@ tabela <- composicao |>
     .default = Source |> stringr::str_to_title())) |> 
   dplyr::group_by(Family, Especies) |>  
   dplyr::summarise(Source = paste(unique(Source), collapse = ", "), 
-                   .groups = "drop")
+                   .groups = "drop") |> 
+  dplyr::mutate(
+    Order = dplyr::case_match(
+      Family,
+      "Alligatoridae" ~ "Crocodylia",
+      c("Testudinidae", "Podocnemididae", "Chelidae", "Kinosternidae",
+        "Emydidae", "Cheloniidae") ~ "Testudines",
+      .default = "Squamata"),
+    .before = 1)
 
 tabela
