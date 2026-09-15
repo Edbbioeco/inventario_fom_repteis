@@ -31,6 +31,11 @@ comunidades
 
 comunidades |> dplyr::glimpse()
 
+## Checar a matriz ----
+
+comunidades |> 
+  dplyr::filter(Especies |> is.na() | Family |> is.na())
+
 # Matriz de composição taxonomica ----
 
 ## Montando a matriz ----
