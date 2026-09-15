@@ -112,6 +112,7 @@ sps_id <- sps_trat |>
     Especies = trimws(Especies),
     Especies = dplyr::case_match(
       Especies,
+      "Chelonoidis carbonaria" ~ "Chelonoidis carbonarius",
       "Philodryas aestivus" ~ "Philodryas aestiva",
       "Placosoma glabelum" ~ "Placosoma glabellum",
       "Bothrops alternatus neuw." ~ "Bothrops alternatus",
@@ -126,7 +127,7 @@ sps_id <- sps_trat |>
       "Tomodon dorsatum" ~ "Tomodon dorsatus",
       "Tupinambis merianae" ~ "Salvator marianae",
       "Mabuya frenata" ~ "Notomabuya frenata",
-      "Anisiolepis grilli"  ~ "Urostrophus grilli",
+      c("Anisiolepis grilli", "Anisolepis grilli")  ~ "Urostrophus grilli",
       "Mabuya dorsivittata" ~ "Aspronema dorsivittatum",
       "Sibynomorphus neuwiedi" ~ "Dipsas neuwiedi",
       "Liotyphlops beui" ~ "Liotyphlops ternetzii",
@@ -143,7 +144,7 @@ sps_id <- sps_trat |>
       "Atractus taeniatus" ~ "Atractus paraguayensis",
       "Crotalus durissus terrificus" ~ "Crotalus durissus",
       "Echinanthera affinis" ~ "Dibernardia affinis",
-      "Bothrops newwiedi" ~ "Bothrops neuwiedii",
+      "Bothrops neuwiedi" ~ "Bothrops neuwiedii",
       "Amphisbaena darwini" ~ "Amphisbaena darwinii",
       "Anops kingii" ~ "Amphisbaena kingii",
       "Amphisbaena mertensi" ~ "Amphisbaena mertensii",
@@ -153,6 +154,11 @@ sps_id <- sps_trat |>
         "Salvator marianae") ~ "Salvator merianae",
       "Bothrops trigemina" ~ "Bothrops alternatus",
       "Bothrops neuwiedi paranaensis" ~ "Bothrops pubescens",
+      c("Anolis philopunctatus", 
+        "Lygophis lineatus", 
+        "Dipsas indica", 
+        "Clelia plúmbea", 
+        "Xenodon biligonigerus") ~ NA_character_,,
       .default = Especies
     ),
     Family = dplyr::case_when(
