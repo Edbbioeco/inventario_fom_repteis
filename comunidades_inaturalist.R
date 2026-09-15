@@ -139,25 +139,25 @@ inaturalist_sf_fom <- inaturalist_sf_fom |>
   scientific_name = scientific_name |> 
     str_replace("Sibynomorphus", "Dipsas"),
   taxon_family_name = dplyr::case_when(
+    scientific_name |> 
+      stringr::str_detect("Enyalius") ~ "Leiosauridae",
+    scientific_name |> 
+      stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
+    scientific_name |> 
+      stringr::str_detect("Notomabuya") ~ "Scincidae",
+    scientific_name |> 
+      stringr::str_detect("Ophiodes") ~ "Diploglossidae",
+    scientific_name |> 
+      stringr::str_detect("Palusophis") ~ "Colubridae",
+    scientific_name |> 
+      stringr::str_detect("Podocnemis") ~ "Podocnemididae",
+    scientific_name |> 
+      str_detect(
+        "Apostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon|Lygophis") ~ "Dipsadidae",
     taxon_family_name == "Varanidae" ~ "Teiidae",
     taxon_family_name|> stringr::str_detect("Xenodon") ~ "Dipsadidae",
     taxon_family_name |> stringr::str_detect("inae") ~ taxon_family_name |> 
       stringr::str_replace("inae", "idae"),
-    taxon_family_name |> 
-      stringr::str_detect("Enyalius") ~ "Leiosauridae",
-    taxon_family_name |> 
-      stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
-    taxon_family_name |> 
-      stringr::str_detect("Notomabuya") ~ "Scincidae",
-    taxon_family_name |> 
-      stringr::str_detect("Ophiodes") ~ "Diploglossidae",
-    taxon_family_name |> 
-      stringr::str_detect("Palusophis") ~ "Colubridae",
-    taxon_family_name |> 
-      stringr::str_detect("Podocnemis") ~ "Podocnemididae",
-    scientific_name |> 
-      str_detect(
-        "Aapostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon") ~ "Dipsadidae",
     taxon_family_name == "Varanidae" ~ "Teiidae",
     .default = taxon_family_name),
   scientific_name = scientific_name |> stringr::str_trim()) |> 
