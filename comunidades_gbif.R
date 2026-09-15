@@ -174,6 +174,11 @@ gbif_registros <- gbif_sf_fom |>
 
 gbif_registros
 
+## Checando a matriz ----
+
+gbif_registros |> 
+  dplyr::filter(Especies |> is.na() | Family |> is.na())
+
 ## Exportando ----
 
 gbif_registros |> writexl::write_xlsx("registros_gbif.xlsx")
