@@ -76,8 +76,8 @@ gbif_sf_fom |>
 gbif_sf_fom <- gbif_sf_fom |> 
   dplyr::mutate(species = dplyr::case_match(
     species,
-    
     "Chelonoidis carbonaria" ~ "Chelonoidis carbonarius",
+    "Uromacerina ricardinii" ~ "Cercophis auratus",
     "Philodryas aestivus" ~ "Philodryas aestiva",
     "Placosoma glabelum" ~ "Placosoma glabellum",
     "Bothrops alternatus neuw." ~ "Bothrops alternatus",
@@ -127,7 +127,27 @@ gbif_sf_fom <- gbif_sf_fom |>
       "Xenodon biligonigerus") ~ NA_character_,
     .default = species
   ),
+  species = species |> str_replace("Sibynomorphus", "Dipsas"),
   family = dplyr::case_when(
+    family == "Varanidae" ~ "Teiidae",
+    family|> stringr::str_detect("Xenodon") ~ "Dipsadidae",
+    family |> stringr::str_detect("inae") ~ family |> 
+      stringr::str_replace("inae", "idae"),
+    family |> 
+      stringr::str_detect("Enyalius") ~ "Leiosauridae",
+    family |> 
+      stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
+    family |> 
+      stringr::str_detect("Notomabuya") ~ "Scincidae",
+    family |> 
+      stringr::str_detect("Ophiodes") ~ "Diploglossidae",
+    family |> 
+      stringr::str_detect("Palusophis") ~ "Colubridae",
+    family |> 
+      stringr::str_detect("Podocnemis") ~ "Podocnemididae",
+    species |> 
+      str_detect(
+        "Aapostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon") ~ "Dipsadidae",
     family == "Varanidae" ~ "Teiidae",
     .default = family
   ),

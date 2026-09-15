@@ -87,6 +87,7 @@ herpetohelp_sf_fom <- herpetohelp_sf_fom |>
   dplyr::mutate(Espécie = dplyr::case_match(
     Espécie,
     "Chelonoidis carbonaria" ~ "Chelonoidis carbonarius",
+    "Uromacerina ricardinii" ~ "Cercophis auratus",
     "Philodryas aestivus" ~ "Philodryas aestiva",
     "Placosoma glabelum" ~ "Placosoma glabellum",
     "Bothrops alternatus neuw." ~ "Bothrops alternatus",
@@ -107,7 +108,8 @@ herpetohelp_sf_fom <- herpetohelp_sf_fom |>
     "Liotyphlops beui" ~ "Liotyphlops ternetzii",
     "Amphisbaena darwini trachura" ~ "Amphisbaena darwinii",
     "Pantodactylus schreibersii" ~ "Cercosaura schreibersii",
-    "Bothrops neuwiedi diorus" ~ "Bothrops neuwiedi",
+    c("Bothrops neuwiedi diorus", 
+      "Bothrops newwiedi") ~ "Bothrops neuwiedi",
     "Mastigodryas bifossatus" ~ "Palusophis bifossatus",
     "Liophis miliaris" ~ "Erythrolamprus miliaris",
     "Sibynomorphus mikanii" ~ "Dipsas mikanii",
@@ -118,8 +120,7 @@ herpetohelp_sf_fom <- herpetohelp_sf_fom |>
     "Atractus taeniatus" ~ "Atractus paraguayensis",
     "Crotalus durissus terrificus" ~ "Crotalus durissus",
     "Echinanthera affinis" ~ "Dibernardia affinis",
-    c("Bothrops neuwiedi diorus", 
-      "Bothrops newwiedi") ~ "Bothrops neuwiedi",
+    "Bothrops neuwiedi" ~ "Bothrops neuwiedii",
     "Amphisbaena darwini" ~ "Amphisbaena darwinii",
     "Anops kingii" ~ "Amphisbaena kingii",
     "Amphisbaena mertensi" ~ "Amphisbaena mertensii",
@@ -136,7 +137,27 @@ herpetohelp_sf_fom <- herpetohelp_sf_fom |>
       "Xenodon biligonigerus") ~ NA_character_,
     .default = Espécie
   ),
+  Espécie = Espécie |> str_replace("Sibynomorphus", "Dipsas"),
   Família = dplyr::case_when(
+    Família == "Varanidae" ~ "Teiidae",
+    Família|> stringr::str_detect("Xenodon") ~ "Dipsadidae",
+    Família |> stringr::str_detect("inae") ~ Família |> 
+      stringr::str_replace("inae", "idae"),
+    Família |> 
+      stringr::str_detect("Enyalius") ~ "Leiosauridae",
+    Família |> 
+      stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
+    Família |> 
+      stringr::str_detect("Notomabuya") ~ "Scincidae",
+    Família |> 
+      stringr::str_detect("Ophiodes") ~ "Diploglossidae",
+    Família |> 
+      stringr::str_detect("Palusophis") ~ "Colubridae",
+    Família |> 
+      stringr::str_detect("Podocnemis") ~ "Podocnemididae",
+    Espécie |> 
+      str_detect(
+        "Aapostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon") ~ "Dipsadidae",
     Família == "Varanidae" ~ "Teiidae",
     .default = Família),
   Espécie = Espécie |> stringr::str_trim()) |> 
@@ -155,8 +176,8 @@ herpetohelp_registros <- herpetohelp_sf_fom |>
   as.data.frame() |> 
   dplyr::mutate(Especies = Espécie,
                 Presence =  1,
-                Family = Família) |> 
-  dplyr::select(ID, Family, Especies, Presence) 
+                Família = Família) |> 
+  dplyr::select(ID, Família, Especies, Presence) 
 
 herpetohelp_registros
 

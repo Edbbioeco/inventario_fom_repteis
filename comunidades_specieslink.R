@@ -86,6 +86,7 @@ specieslink_sf_fom <- specieslink_sf_fom |>
   dplyr::mutate(scientificname = dplyr::case_match(
     scientificname,
     "Chelonoidis carbonaria" ~ "Chelonoidis carbonarius",
+    "Uromacerina ricardinii" ~ "Cercophis auratus",
     "Philodryas aestivus" ~ "Philodryas aestiva",
     "Placosoma glabelum" ~ "Placosoma glabellum",
     "Bothrops alternatus neuw." ~ "Bothrops alternatus",
@@ -106,7 +107,8 @@ specieslink_sf_fom <- specieslink_sf_fom |>
     "Liotyphlops beui" ~ "Liotyphlops ternetzii",
     "Amphisbaena darwini trachura" ~ "Amphisbaena darwinii",
     "Pantodactylus schreibersii" ~ "Cercosaura schreibersii",
-    "Bothrops neuwiedi diorus" ~ "Bothrops neuwiedi",
+    c("Bothrops neuwiedi diorus", 
+      "Bothrops newwiedi") ~ "Bothrops neuwiedi",
     "Mastigodryas bifossatus" ~ "Palusophis bifossatus",
     "Liophis miliaris" ~ "Erythrolamprus miliaris",
     "Sibynomorphus mikanii" ~ "Dipsas mikanii",
@@ -117,8 +119,7 @@ specieslink_sf_fom <- specieslink_sf_fom |>
     "Atractus taeniatus" ~ "Atractus paraguayensis",
     "Crotalus durissus terrificus" ~ "Crotalus durissus",
     "Echinanthera affinis" ~ "Dibernardia affinis",
-    c("Bothrops neuwiedi diorus", 
-      "Bothrops newwiedi") ~ "Bothrops neuwiedi",
+    "Bothrops neuwiedi" ~ "Bothrops neuwiedii",
     "Amphisbaena darwini" ~ "Amphisbaena darwinii",
     "Anops kingii" ~ "Amphisbaena kingii",
     "Amphisbaena mertensi" ~ "Amphisbaena mertensii",
@@ -135,7 +136,27 @@ specieslink_sf_fom <- specieslink_sf_fom |>
       "Xenodon biligonigerus") ~ NA_character_,
     .default = scientificname
   ),
+  scientificname = scientificname |> str_replace("Sibynomorphus", "Dipsas"),
   family = dplyr::case_when(
+    family == "Varanidae" ~ "Teiidae",
+    family|> stringr::str_detect("Xenodon") ~ "Dipsadidae",
+    family |> stringr::str_detect("inae") ~ family |> 
+      stringr::str_replace("inae", "idae"),
+    family |> 
+      stringr::str_detect("Enyalius") ~ "Leiosauridae",
+    family |> 
+      stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
+    family |> 
+      stringr::str_detect("Notomabuya") ~ "Scincidae",
+    family |> 
+      stringr::str_detect("Ophiodes") ~ "Diploglossidae",
+    family |> 
+      stringr::str_detect("Palusophis") ~ "Colubridae",
+    family |> 
+      stringr::str_detect("Podocnemis") ~ "Podocnemididae",
+    scientificname |> 
+      str_detect(
+        "Aapostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon") ~ "Dipsadidae",
     family == "Varanidae" ~ "Teiidae",
     .default = family
   ),

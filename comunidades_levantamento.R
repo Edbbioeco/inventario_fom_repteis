@@ -113,6 +113,7 @@ sps_id <- sps_trat |>
     Especies = dplyr::case_match(
       Especies,
       "Chelonoidis carbonaria" ~ "Chelonoidis carbonarius",
+      "Uromacerina ricardinii" ~ "Cercophis auratus",
       "Philodryas aestivus" ~ "Philodryas aestiva",
       "Placosoma glabelum" ~ "Placosoma glabellum",
       "Bothrops alternatus neuw." ~ "Bothrops alternatus",
@@ -159,9 +160,10 @@ sps_id <- sps_trat |>
         "Lygophis lineatus", 
         "Dipsas indica", 
         "Clelia plúmbea", 
-        "Xenodon biligonigerus") ~ NA_character_,,
+        "Xenodon biligonigerus") ~ NA_character_,
       .default = Especies
     ),
+    Especies = Especies |> str_replace("Sibynomorphus", "Dipsas"),
     Family = dplyr::case_when(
       Especies |> 
         stringr::str_detect("Acanthochelys|Hydromedusa|Phrynops") ~ "Chelidae",
@@ -196,6 +198,28 @@ sps_id <- sps_trat |>
       Especies |> 
         stringr::str_detect("Chironius|Leptophis|Spilotess|Tropidodryas") ~ "Colubridae",
       .default = "Dipsadidae"  
+    ),
+    Family = dplyr::case_when(
+      Family == "Varanidae" ~ "Teiidae",
+      Family|> stringr::str_detect("Xenodon") ~ "Dipsadidae",
+      Family |> stringr::str_detect("inae") ~ Family |> 
+        stringr::str_replace("inae", "idae"),
+      Family |> 
+        stringr::str_detect("Enyalius") ~ "Leiosauridae",
+      Family |> 
+        stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
+      Family |> 
+        stringr::str_detect("Notomabuya") ~ "Scincidae",
+      Family |> 
+        stringr::str_detect("Ophiodes") ~ "Diploglossidae",
+      Family |> 
+        stringr::str_detect("Palusophis") ~ "Colubridae",
+      Family |> 
+        stringr::str_detect("Podocnemis") ~ "Podocnemididae",
+      Especies |> 
+        str_detect(
+          "Aapostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon") ~ "Dipsadidae",
+      .default = Family
     ),
     Especies = Especies |> stringr::str_trim()
   ) |> 
