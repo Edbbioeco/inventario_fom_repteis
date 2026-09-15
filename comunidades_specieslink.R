@@ -181,6 +181,11 @@ specieslink_registros <- specieslink_sf_fom |>
 
 specieslink_registros
 
+## Checando a matriz ----
+
+specieslink_registros |> 
+  dplyr::filter(Especies |> is.na() | Family |> is.na())
+
 ## Exportando ----
 
 specieslink_registros |> writexl::write_xlsx("registros_specieslink.xlsx")
