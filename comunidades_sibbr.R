@@ -211,6 +211,11 @@ sibbr_registros <- sibbr_sf_fom |>
 
 sibbr_registros
 
+## Checando a matriz ----
+
+sibbr_registros |> 
+  dplyr::filter(Especies |> is.na() | Family |> is.na())
+
 ## Exportando ----
 
 sibbr_registros |> writexl::write_xlsx("registros_sibbr.xlsx")
