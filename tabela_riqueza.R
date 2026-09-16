@@ -92,3 +92,11 @@ tabela |>
   dplyr::summarise(riqueza = Family |> dplyr::n_distinct(),
                    .by = Order) |> 
   dplyr::arrange(riqueza |> dplyr::desc())
+
+### Riqueza de espécies por gênero ----
+
+tabela |> 
+  dplyr::mutate(Genus = Species |> stringr::word(1)) |> 
+  dplyr::summarise(riqueza = dplyr::n(),
+                   .by = Genus) |> 
+  dplyr::arrange(riqueza |> dplyr::desc())
