@@ -84,83 +84,117 @@ herpetohelp_sf_fom |>
 ## tratando as espécies ----
 
 herpetohelp_sf_fom <- herpetohelp_sf_fom |> 
-  dplyr::mutate(Espécie = dplyr::case_match(
-    Espécie,
-    "Chelonoidis carbonaria" ~ "Chelonoidis carbonarius",
-    "Uromacerina ricardinii" ~ "Cercophis auratus",
-    "Philodryas aestivus" ~ "Philodryas aestiva",
-    "Placosoma glabelum" ~ "Placosoma glabellum",
-    "Bothrops alternatus neuw." ~ "Bothrops alternatus",
-    "Ecpleopus gaudichaudi" ~ "Ecpleopus gaudichaudii",
-    "Micrurus silvae" ~"Micrurus silviae",
-    "Xenodon merremi" ~ "Xenodon merremii",
-    "Rachidelus brazili" ~ "Rhachidelus brazili",
-    "Paraphimophis rustica" ~ "Paraphimophis rusticus",
-    "Oxyrophus rhombifer" ~ "Oxyrhopus rhombifer",
-    "Philodryas olfersi" ~ "Philodryas olfersii",
-    "Leposternon microcephalum" ~ "Leposternon microcephalus",
-    "Tomodon dorsatum" ~ "Tomodon dorsatus",
-    "Tupinambis merianae" ~ "Salvator marianae",
-    "Mabuya frenata" ~ "Notomabuya frenata",
-    c("Anisiolepis grilli", "Anisolepis grilli")  ~ "Urostrophus grilli",
-    "Mabuya dorsivittata" ~ "Aspronema dorsivittatum",
-    "Sibynomorphus neuwiedi" ~ "Dipsas neuwiedi",
-    "Liotyphlops beui" ~ "Liotyphlops ternetzii",
-    "Amphisbaena darwini trachura" ~ "Amphisbaena darwinii",
-    "Pantodactylus schreibersii" ~ "Cercosaura schreibersii",
-    c("Bothrops neuwiedi diorus", 
-      "Bothrops newwiedi") ~ "Bothrops neuwiedi",
-    "Mastigodryas bifossatus" ~ "Palusophis bifossatus",
-    "Liophis miliaris" ~ "Erythrolamprus miliaris",
-    "Sibynomorphus mikanii" ~ "Dipsas mikanii",
-    "Liophis jaegeri" ~ "Erythrolamprus jaegeri",
-    "Phalotris iheringii" ~ "Phalotris lemniscatus",
-    "Thamnodynastes hypoconia" ~ "Dryophylax hypoconia",
-    "Thamnodynastes strigatus" ~ "Mesotes strigatus",
-    "Atractus taeniatus" ~ "Atractus paraguayensis",
-    "Crotalus durissus terrificus" ~ "Crotalus durissus",
-    "Echinanthera affinis" ~ "Dibernardia affinis",
-    "Bothrops neuwiedi" ~ "Bothrops neuwiedii",
-    "Amphisbaena darwini" ~ "Amphisbaena darwinii",
-    "Anops kingii" ~ "Amphisbaena kingii",
-    "Amphisbaena mertensi" ~ "Amphisbaena mertensii",
-    c("Varanus salvator", 
-      "Tupinambis teguixin",
-      "Tupinambis teguixim",
-      "Salvator marianae") ~ "Salvator merianae",
-    "Bothrops trigemina" ~ "Bothrops alternatus",
-    "Bothrops neuwiedi paranaensis" ~ "Bothrops pubescens",
-    c("Anolis philopunctatus", 
-      "Lygophis lineatus", 
-      "Dipsas indica", 
-      "Clelia plúmbea", 
-      "Xenodon biligonigerus") ~ NA_character_,
-    .default = Espécie
-  ),
-  Espécie = Espécie |> str_replace("Sibynomorphus", "Dipsas"),
-  Família = dplyr::case_when(
-    Espécie |> 
-      stringr::str_detect("Enyalius") ~ "Leiosauridae",
-    Espécie |> 
-      stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
-    Espécie |> 
-      stringr::str_detect("Notomabuya") ~ "Scincidae",
-    Espécie |> 
-      stringr::str_detect("Ophiodes") ~ "Diploglossidae",
-    Espécie |> 
-      stringr::str_detect("Palusophis") ~ "Colubridae",
-    Espécie |> 
-      stringr::str_detect("Podocnemis") ~ "Podocnemididae",
-    Espécie |> 
-      str_detect(
-        "Apostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon|Lygophis") ~ "Dipsadidae",
-    Família == "Varanidae" ~ "Teiidae",
-    Família|> stringr::str_detect("Xenodon") ~ "Dipsadidae",
-    Família |> stringr::str_detect("inae") ~ Família |> 
-      stringr::str_replace("inae", "idae"),
-    Família == "Varanidae" ~ "Teiidae",
-    .default = Família),
-  Espécie = Espécie |> stringr::str_trim()) |> 
+  dplyr::mutate(Espécie = Espécie |> stringr::str_squish(),
+                Espécie = dplyr::case_match(
+                  Espécie,
+                  "Chelonoidis carbonaria" ~ "Chelonoidis carbonarius",
+                  "Uromacerina ricardinii" ~ "Cercophis auratus",
+                  "Philodryas aestivus" ~ "Philodryas aestiva",
+                  "Placosoma glabelum" ~ "Placosoma glabellum",
+                  "Bothrops alternatus neuw." ~ "Bothrops alternatus",
+                  "Ecpleopus gaudichaudi" ~ "Ecpleopus gaudichaudii",
+                  "Micrurus silvae" ~"Micrurus silviae",
+                  "Xenodon merremi" ~ "Xenodon merremii",
+                  "Rachidelus brazili" ~ "Rhachidelus brazili",
+                  "Paraphimophis rustica" ~ "Paraphimophis rusticus",
+                  "Oxyrophus rhombifer" ~ "Oxyrhopus rhombifer",
+                  "Philodryas olfersi" ~ "Philodryas olfersii",
+                  "Leposternon microcephalum" ~ "Leposternon microcephalus",
+                  "Tomodon dorsatum" ~ "Tomodon dorsatus",
+                  "Mabuya frenata" ~ "Notomabuya frenata",
+                  c("Anisiolepis grilli", "Anisolepis grilli")  ~ "Urostrophus grilli",
+                  "Mabuya dorsivittata" ~ "Aspronema dorsivittatum",
+                  "Sibynomorphus neuwiedi" ~ "Dipsas neuwiedi",
+                  "Liotyphlops beui" ~ "Liotyphlops ternetzii",
+                  "Amphisbaena darwini trachura" ~ "Amphisbaena darwinii",
+                  "Pantodactylus schreibersii" ~ "Cercosaura schreibersii",
+                  c("Bothrops neuwiedi diorus", 
+                    "Bothrops newwiedi") ~ "Bothrops neuwiedi",
+                  "Mastigodryas bifossatus" ~ "Palusophis bifossatus",
+                  "Liophis miliaris" ~ "Erythrolamprus miliaris",
+                  "Sibynomorphus mikanii" ~ "Dipsas mikanii",
+                  "Liophis jaegeri" ~ "Erythrolamprus jaegeri",
+                  "Phalotris iheringii" ~ "Phalotris lemniscatus",
+                  "Thamnodynastes hypoconia" ~ "Dryophylax hypoconia",
+                  "Thamnodynastes strigatus" ~ "Mesotes strigatus",
+                  "Atractus taeniatus" ~ "Atractus paraguayensis",
+                  "Crotalus durissus terrificus" ~ "Crotalus durissus",
+                  "Echinanthera affinis" ~ "Dibernardia affinis",
+                  "Bothrops neuwiedi" ~ "Bothrops neuwiedii",
+                  "Amphisbaena darwini" ~ "Amphisbaena darwinii",
+                  "Anops kingii" ~ "Amphisbaena kingii",
+                  "Amphisbaena mertensi" ~ "Amphisbaena mertensii",
+                  c("Varanus salvator", 
+                    "Tupinambis merianae",
+                    "Tupinambis teguixin",
+                    "Tupinambis teguixim",
+                    "Salvator marianae",
+                    "Salvator rufescens") ~ "Salvator merianae",
+                  "Bothrops trigemina" ~ "Bothrops alternatus",
+                  "Bothrops neuwiedi paranaensis" ~ "Bothrops pubescens",
+                  c("Anolis philopunctatus", 
+                    "Lygophis lineatus", 
+                    "Dipsas indica", 
+                    "Clelia plúmbea", 
+                    "Xenodon biligonigerus",
+                    "Caiman crocodylus",
+                    "Eunectes murinus",
+                    "Eunectes notaeus",
+                    "Dermochelys coriacea",
+                    "Amalosia queenslandia",
+                    "Diploglossus fasciatus",
+                    "Dipsas incerta",
+                    "Hydrodynastes gigas",
+                    "Pseudoboa neuwiedii",
+                    "Xenopholis scalaris",
+                    "Lepidodactylus lugubris",
+                    "Rhinoclemmys punctularia",
+                    "Arthrosaura reticulata",
+                    "Heterodactylus imbricatus",
+                    "Iguana iguana",
+                    "Polychrus marmoratus",
+                    "Chatogekko amazonicus",
+                    "Gonatodes humeralis",
+                    "Cnemidophorus cryptus",
+                    "Cnemidophorus gramivagus",
+                    "Kentropyx calcarata",
+                    "Tropidurus oreadicus",
+                    "Tropidurus torquatus",
+                    "Uranoscodon superciliosus",
+                    "Bothrops atrox",
+                    "Caretta caretta",
+                    "Chelonia mydas",
+                    "Lepidochelys olivacea",
+                    "Podocnemis expansa",
+                    "Podocnemis sextuberculata",
+                    "Podocnemis unifilis") ~ NA_character_,
+                  .default = Espécie
+                ),
+                Espécie = Espécie |> str_replace("Sibynomorphus", "Dipsas"),
+                Família = dplyr::case_when(
+                  Espécie |> 
+                    stringr::str_detect("Enyalius") ~ "Leiosauridae",
+                  Espécie |> 
+                    stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
+                  Espécie |> 
+                    stringr::str_detect("Notomabuya") ~ "Scincidae",
+                  Espécie |> 
+                    stringr::str_detect("Ophiodes") ~ "Diploglossidae",
+                  Espécie |> 
+                    stringr::str_detect("Palusophis") ~ "Colubridae",
+                  Espécie |> 
+                    stringr::str_detect("Podocnemis") ~ "Podocnemididae",
+                  Espécie |> 
+                    str_detect(
+                      "Apostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon|Lygophis|Adelphostigma") ~ "Dipsadidae",
+                  Família == "Varanidae" ~ "Teiidae",
+                  Família|> stringr::str_detect("Xenodon") ~ "Dipsadidae",
+                  Família |> stringr::str_detect("inae") ~ Família |> 
+                    stringr::str_replace("inae", "idae"),
+                  Família == "Varanidae" ~ "Teiidae",
+                  .default = Família
+                ),
+                Espécie = Espécie |> stringr::str_trim()) |> 
   dplyr::filter(!Espécie |> is.na() &
                   !Espécie |> stringr::str_detect("sp|sp.") &
                   !Espécie |> 
@@ -174,17 +208,17 @@ herpetohelp_sf_fom
 herpetohelp_registros <- herpetohelp_sf_fom |> 
   sf::st_join(grade) |> 
   as.data.frame() |> 
-  dplyr::mutate(Especies = Espécie,
+  dplyr::mutate(Espécie = Espécie,
                 Presence =  1,
                 Family = Família) |> 
-  dplyr::select(ID, Family, Especies, Presence) 
+  dplyr::select(ID, Family, Espécie, Presence) 
 
 herpetohelp_registros
 
 ## Checando a matriz ----
 
 herpetohelp_registros |> 
-  dplyr::filter(Especies |> is.na() | Family |> is.na())
+  dplyr::filter(Espécie |> is.na() | Family |> is.na())
 
 ## Exportando ----
 
