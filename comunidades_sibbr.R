@@ -113,7 +113,7 @@ sibbr_sf_fom |>
 ## tratando as espécies ----
 
 sibbr_sf_fom <- sibbr_sf_fom |> 
-  dplyr::mutate(species = species |> stringr::str_str_squish(),
+  dplyr::mutate(species = species |> stringr::str_squish(),
                 species = dplyr::case_match(
     species,
     "Chelonoidis carbonaria" ~ "Chelonoidis carbonarius",
