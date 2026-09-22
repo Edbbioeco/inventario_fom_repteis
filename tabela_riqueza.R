@@ -41,7 +41,9 @@ tabela <- composicao |>
     Source,
     "gbif" ~ "GBIF",
     "inaturalist" ~ "iNaturalist",
-    .default = Source |> stringr::str_to_title())) |> 
+    .default = Source |> stringr::str_to_title()),
+    Family = Family |> stringr::str_squish(),
+    Especies = Especies |> stringr::str_squish()) |> 
   dplyr::group_by(Family, Especies) |>  
   dplyr::summarise(Source = paste(unique(Source), collapse = ", "), 
                    .groups = "drop") |> 
