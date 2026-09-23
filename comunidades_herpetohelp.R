@@ -211,7 +211,7 @@ herpetohelp_registros <- herpetohelp_sf_fom |>
   dplyr::mutate(Espécie = Espécie,
                 Presence =  1,
                 Family = Família) |> 
-  dplyr::select(ID, Family, Especie, Presence) 
+  dplyr::select(ID, Family, Especies, Presence) 
 
 herpetohelp_registros
 
