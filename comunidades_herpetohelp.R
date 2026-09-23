@@ -208,7 +208,7 @@ herpetohelp_sf_fom
 herpetohelp_registros <- herpetohelp_sf_fom |> 
   sf::st_join(grade) |> 
   as.data.frame() |> 
-  dplyr::mutate(Espécie = Espécie,
+  dplyr::mutate(Especies = Espécie,
                 Presence =  1,
                 Family = Família) |> 
   dplyr::select(ID, Family, Especies, Presence) 
@@ -218,7 +218,7 @@ herpetohelp_registros
 ## Checando a matriz ----
 
 herpetohelp_registros |> 
-  dplyr::filter(Espécie |> is.na() | Family |> is.na())
+  dplyr::filter(Especies |> is.na() | Family |> is.na())
 
 ## Exportando ----
 
