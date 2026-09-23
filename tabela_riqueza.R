@@ -65,7 +65,8 @@ tabela
 tabela_flex <- tabela |> 
   flextable::flextable() |> 
   flextable::align(align = "center", part = "all") |> 
-  flextable::italic(j = 3, part = "body")
+  flextable::italic(j = 3, part = "body") |> 
+  flextable::width(width = 1.5)
 
 tabela_flex
 
