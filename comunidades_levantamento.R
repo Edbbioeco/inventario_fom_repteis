@@ -130,6 +130,8 @@ sps_id <- sps_trat |>
                   "Mabuya dorsivittata" ~ "Aspronema dorsivittatum",
                   "Sibynomorphus neuwiedi" ~ "Dipsas neuwiedi",
                   c("Liotyphlops beui", "Liotyphlops sousai") ~ "Liotyphlops ternetzii",
+                  "Taeniophallus poecilopogon" ~ "Dibernardia poecilopogon",
+                  "Amphisbaena darwini trachura" ~ "Amphisbaena darwinii",
                   "Amphisbaena darwini trachura" ~ "Amphisbaena darwinii",
                   "Pantodactylus schreibersii" ~ "Cercosaura schreibersii",
                   c("Bothrops neuwiedi diorus", 
