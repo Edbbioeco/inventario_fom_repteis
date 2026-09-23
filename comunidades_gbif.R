@@ -94,7 +94,7 @@ gbif_sf_fom <- gbif_sf_fom |>
                   "Mabuya frenata" ~ "Notomabuya frenata",
                   c("Anisiolepis grilli", "Anisolepis grilli")  ~ "Urostrophus grilli",
                   "Mabuya dorsivittata" ~ "Aspronema dorsivittatum",
-                  "Sibynomorphus neuwiedi" ~ "Dipsas neuwiedi",
+                  "Sibynomorphus neuwiedii" ~ "Dipsas neuwiedi",
                   c("Liotyphlops beui", "Liotyphlops sousai") ~ "Liotyphlops ternetzii",
                   "Taeniophallus poecilopogon" ~ "Dibernardia poecilopogon",
                   "Amphisbaena darwini trachura" ~ "Amphisbaena darwinii",
