@@ -135,7 +135,7 @@ sps_id <- sps_trat |>
                   "Amphisbaena darwini trachura" ~ "Amphisbaena darwinii",
                   "Pantodactylus schreibersii" ~ "Cercosaura schreibersii",
                   c("Bothrops neuwiedi diorus", 
-                    "Bothrops newwiedii") ~ "Bothrops neuwiedi",
+                    "Bothrops newwiedi") ~ "Bothrops neuwiedi",
                   "Mastigodryas bifossatus" ~ "Palusophis bifossatus",
                   "Liophis miliaris" ~ "Erythrolamprus miliaris",
                   "Sibynomorphus mikanii" ~ "Dipsas mikanii",
