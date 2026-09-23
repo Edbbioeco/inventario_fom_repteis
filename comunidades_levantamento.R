@@ -129,7 +129,7 @@ sps_id <- sps_trat |>
                   c("Anisiolepis grilli", "Anisolepis grilli")  ~ "Urostrophus grilli",
                   "Mabuya dorsivittata" ~ "Aspronema dorsivittatum",
                   "Sibynomorphus neuwiedi" ~ "Dipsas neuwiedi",
-                  "Liotyphlops beui" ~ "Liotyphlops ternetzii",
+                  c("Liotyphlops beui", "Liotyphlops sousai") ~ "Liotyphlops ternetzii",
                   "Amphisbaena darwini trachura" ~ "Amphisbaena darwinii",
                   "Pantodactylus schreibersii" ~ "Cercosaura schreibersii",
                   c("Bothrops neuwiedi diorus", 
