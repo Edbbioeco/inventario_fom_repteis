@@ -166,7 +166,7 @@ sibbr_sf_fom <- sibbr_sf_fom |>
       "Dipsas indica", 
       "Clelia plúmbea", 
       "Xenodon biligonigerus",
-      "Caiman crocodylus",
+      "Caiman crocodilus",
       "Eunectes murinus",
       "Eunectes notaeus",
       "Dermochelys coriacea",
