@@ -272,7 +272,7 @@ sps_id <- sps_trat |>
       Especies |> stringr::str_detect("Notomabuya") ~ "Scincidae",
       Especies |> stringr::str_detect("Ophiodes") ~ "Diploglossidae",
       Especies |> stringr::str_detect("Podocnemis") ~ "Podocnemididae",
-      Especies |> stringr::str_detect("Apostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon|Lygophis") ~ "Dipsadidae|Pseudablabes",
+      Especies |> stringr::str_detect("Apostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon|Lygophis|Pseudablabes") ~ "Dipsadidae",
       Family == "Varanidae" ~ "Teiidae",
       Family |> stringr::str_detect("Xenodon") ~ "Dipsadidae",
       Family |> stringr::str_detect("inae") ~ Family |> stringr::str_replace("inae", "idae"),
