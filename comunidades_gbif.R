@@ -209,6 +209,7 @@ gbif_sf_fom <- gbif_sf_fom |>
     .default = species)) |>
   dplyr::mutate(
     family = dplyr::case_when(
+      species |> stringr::str_detect("Urostrophus") ~ "Iguanidae",
       species |> stringr::str_detect("Enyalius") ~ "Leiosauridae",
       species |> stringr::str_detect("Liotyphlops") ~ "Anomalepididae",
       species |> stringr::str_detect("Notomabuya") ~ "Scincidae",
@@ -216,7 +217,7 @@ gbif_sf_fom <- gbif_sf_fom |>
       species |> stringr::str_detect("Palusophis") ~ "Colubridae",
       species |> stringr::str_detect("Podocnemis") ~ "Podocnemididae",
       species |> stringr::str_detect(
-        "Apostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon|Lygophis|Adelphostigma"
+        "Apostolepis|Atractus|Boiruna|Clelia|Dibernardia|Dipsas|Dryophylax|Echinanthera|Erythrolamprus|Gomesophis|Oxyrhopus|Helicops|Imantodes|Mesotes|Paraphimophis|Phalotris|Philodryas|Pseudoboa|Ptychophis|Rhachidelus|Siphlophis|Taeniophallus|Thamnodynastes|Tomodon|Tropidodryas|Cercophis|Xenodon|Lygophis|Adelphostigma|Pseudablabes"
     ) ~ "Dipsadidae",
     family == "Varanidae" ~ "Teiidae",
     family |> stringr::str_detect("Xenodon") ~ "Dipsadidae",
