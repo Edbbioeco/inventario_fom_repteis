@@ -40,15 +40,15 @@ ggplot() +
 
 ## Importar ----
 
-fom <- sf::st_read("fom.shp")
+AMF <- sf::st_read("fom.shp")
 
 ## Visualizar ----
 
-fom
+AMF
 
 ggplot() +
   geom_sf(data = ma, color = "green", fill = "green") +
-  geom_sf(data = fom, color = "darkgreen", fill = "darkgreen") +
+  geom_sf(data = AMF, color = "darkgreen", fill = "darkgreen") +
   geom_sf(data = br, color = "black", fill = "transparent")
 
 # Shapefile da grade ----
@@ -63,7 +63,7 @@ grade
 
 ggplot() +
   geom_sf(data = ma, color = "green", fill = "green") +
-  geom_sf(data = fom, color = "darkgreen", fill = "darkgreen") +
+  geom_sf(data = AMF, color = "darkgreen", fill = "darkgreen") +
   geom_sf(data = grade, color = "black", fill = "transparent", 
           linewidth  = 0.05) +
   geom_sf(data = br, color = "black", fill = "transparent")
@@ -76,8 +76,8 @@ ggplot() +
           linewidth = 1) +
   geom_sf(data = ma, 
           aes(color = "Atlantic Forest", fill = "Atlantic Forest")) +
-  geom_sf(data = fom, 
-          aes(color = "FOM", fill = "FOM")) +
+  geom_sf(data = AMF, 
+          aes(color = "AMF", fill = "AMF")) +
   geom_sf(data = br, color = "black", fill = "transparent", 
           linewidth = 1) +
   geom_sf(data = grade, 
@@ -89,19 +89,19 @@ ggplot() +
            ylim = c(-30, -23.5)) +
   scale_color_manual(values = c("Brazil" = "black",
                                 "Atlantic Forest" = "green",
-                                "FOM" = "darkgreen",
+                                "AMF" = "darkgreen",
                                 "Grid" = "orange"),
                      breaks = c("Brazil", 
                                 "Atlantic Forest",
-                                "FOM",
+                                "AMF",
                                 "Grid")) +
   scale_fill_manual(values = c("Brazil" = "white",
                                "Atlantic Forest" = "green",
-                               "FOM" = "darkgreen",
+                               "AMF" = "darkgreen",
                                "Grid" = "transparent"),
                     breaks = c("Brazil", 
                                "Atlantic Forest",
-                               "FOM",
+                               "AMF",
                                "Grid")) +
   labs(color = NULL,
        fill = NULL) +
@@ -112,5 +112,5 @@ ggplot() +
         panel.border = element_rect(color = "black", linewidth = 2)) +
   ggview::canvas(height = 10, width = 12)
 
-ggsave(filename = "mapa_grade_fom.png",
+ggsave(filename = "mapa_grade_AMF.png",
        height = 10, width = 12)
