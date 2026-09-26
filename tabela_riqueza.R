@@ -8,7 +8,9 @@ library(flextable)
 
 # Dados ----
 
-## Importar ----
+## Espécies ----
+
+### Importar ----
 
 composicao <- purrr::map_dfr(
   c("gbif", 
@@ -25,7 +27,7 @@ composicao <- purrr::map_dfr(
   },
   .progress = TRUE)
 
-## Visualizar ----
+### Visualizar ----
 
 composicao
 
