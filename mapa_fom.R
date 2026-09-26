@@ -42,15 +42,15 @@ ggplot() +
 
 ## Importar ----
 
-fom <- sf::st_read("fom.shp")
+AMF <- sf::st_read("fom.shp")
 
 ## Visualizar ----
 
-fom
+AMF
 
 ggplot() +
   geom_sf(data = ma, color = "green", fill = "green") +
-  geom_sf(data = fom, color = "darkgreen", fill = "darkgreen") +
+  geom_sf(data = AMF, color = "darkgreen", fill = "darkgreen") +
   geom_sf(data = br, color = "black", fill = "transparent")
 
 # Mapa ----
@@ -63,24 +63,24 @@ mapa_principal <- ggplot() +
           linewidth = 1) +
   geom_sf(data = ma, 
           aes(color = "Atlantic Forest", fill = "Atlantic Forest")) +
-  geom_sf(data = fom, 
-          aes(color = "FOM", fill = "FOM")) +
+  geom_sf(data = AMF, 
+          aes(color = "AMF", fill = "AMF")) +
   geom_sf(data = br, color = "black", fill = "transparent", 
           linewidth = 1) +
   coord_sf(xlim = c(-54.04717, -44.25722),
            ylim = c(-30.36529, -22.56086)) +
   scale_color_manual(values = c("Brazil" = "black",
                                 "Atlantic Forest" = "green",
-                                "FOM" = "darkgreen"),
+                                "AMF" = "darkgreen"),
                      breaks = c("Brazil", 
                                 "Atlantic Forest",
-                                "FOM")) +
+                                "AMF")) +
   scale_fill_manual(values = c("Brazil" = "white",
                                "Atlantic Forest" = "green",
-                               "FOM" = "darkgreen"),
+                               "AMF" = "darkgreen"),
                     breaks = c("Brazil", 
                                "Atlantic Forest",
-                               "FOM")) +
+                               "AMF")) +
   labs(color = NULL,
        fill = NULL) +
   theme_bw() +
@@ -97,7 +97,7 @@ mapa_principal
 inset_map <- ggplot() +
   geom_sf(data = br, color = "black", fill = "white") +
   geom_sf(data = ma, color = "green", fill = "green") +
-  geom_sf(data = fom, color = "darkgreen", fill = "darkgreen") +
+  geom_sf(data = AMF, color = "darkgreen", fill = "darkgreen") +
   geom_sf(data = br, color = "black", fill = "transparent",
           linewidth = 1) +
   geom_rect(aes(xmin = -54.04717, xmax = -44.25722,
@@ -121,5 +121,5 @@ cowplot::ggdraw(mapa_principal) +
                      width = 0.45) +
   ggview::canvas(height = 10, width = 12)
 
-ggsave(filename = "mapa_fom.png",
+ggsave(filename = "mapa_AMF.png",
        height = 10, width = 12)
