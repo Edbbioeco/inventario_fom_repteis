@@ -39,6 +39,12 @@ composicao |> dplyr::glimpse()
 
 salve <- readr::read_csv("salve_criterio.csv")
 
+### Visualizar ----
+
+salve
+
+salve |> dplyr::glimpse() 
+
 # Tabela ----
 
 ## Montar a tabela ----
@@ -64,7 +70,23 @@ tabela <- composicao |>
         "Emydidae", "Cheloniidae") ~ "Testudines",
       .default = "Squamata"),
     .before = 1) |> 
-  dplyr::arrange(Order, Family, Species)
+  dplyr::arrange(Order, Family, Species) |> 
+  dplyr::left_join(salve |> 
+                     dplyr::rename("Species" = especie,
+                                   "BR" = categoria) |> 
+                     dplyr::mutate(BR = dplyr::case_match(
+                       
+                       BR,
+                       "Vulnerável" ~ "VU",
+                       "Menos Preocupante" ~ "LC",
+                       "Em Perigo" ~ "EN",
+                       "Quase Ameaçada" ~ "NT",
+                       "Dados Insuficientes" ~ "DD",
+                       "Criticamente em Perigo" ~ "CR"
+                       
+                       )) |> 
+                     dplyr::select(Species, BR),
+                   by = "Species")
 
 tabela
 
