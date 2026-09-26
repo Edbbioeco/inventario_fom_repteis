@@ -33,6 +33,12 @@ composicao
 
 composicao |> dplyr::glimpse()
 
+## Dados da plataforma SALVE ----
+
+### Importar ----
+
+salve <- readr::read_csv("salve_criterio.csv")
+
 # Tabela ----
 
 ## Montar a tabela ----
