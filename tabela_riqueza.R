@@ -133,3 +133,10 @@ tabela |>
   dplyr::summarise(riqueza = dplyr::n(),
                    .by = Genus) |> 
   dplyr::arrange(riqueza |> dplyr::desc())
+
+### Quantidade por categoria ----
+
+tabela |> 
+  dplyr::summarise(n = dplyr::n(),
+                   .by = BR) |> 
+  dplyr::arrange(n |> dplyr::desc())
