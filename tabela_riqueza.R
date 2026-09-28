@@ -121,6 +121,15 @@ tabela |>
                    .by = Family) |> 
   dplyr::arrange(riqueza |> dplyr::desc())
 
+### Porcentagem de cada família ----
+
+tabela |> 
+  dplyr::summarise(riqueza = dplyr::n_distinct(Family),
+                   porcentagem = (riqueza / 21) |> 
+                     round(3) * 100,
+                   .by = Order) |> 
+  dplyr::arrange(riqueza |> dplyr::desc())
+
 ### Riqueza por família ----
 
 tabela |> 
