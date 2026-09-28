@@ -110,6 +110,8 @@ tabela_flex |> flextable::save_as_docx(path = "tabela_riqueza.docx")
 
 tabela |> 
   dplyr::summarise(riqueza = dplyr::n(),
+                   pocrcentagem = (riqueza / tabela |> nrow()) |> 
+                     round(3) * 100,
                    .by = Order)
 
 ### Riqueza por família ----
