@@ -144,6 +144,8 @@ tabela |>
 tabela |> 
   dplyr::mutate(Genus = Species |> stringr::word(1)) |> 
   dplyr::summarise(riqueza = dplyr::n(),
+                   porcentagem = (riqueza / tabela |> nrow()) |> 
+                     round(3) * 199,
                    .by = Genus) |> 
   dplyr::arrange(riqueza |> dplyr::desc())
 
