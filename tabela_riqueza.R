@@ -118,6 +118,8 @@ tabela |>
 
 tabela |> 
   dplyr::summarise(riqueza = dplyr::n(),
+                   porcentagem = (riqueza / tabela |> nrow()) |> 
+                     round(3) * 100,
                    .by = Family) |> 
   dplyr::arrange(riqueza |> dplyr::desc())
 
