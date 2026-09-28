@@ -153,5 +153,7 @@ tabela |>
 
 tabela |> 
   dplyr::summarise(n = dplyr::n(),
+                   porcentagem = (n / tabela |> nrow()) |> 
+                     round(3) * 100,
                    .by = BR) |> 
   dplyr::arrange(n |> dplyr::desc())
