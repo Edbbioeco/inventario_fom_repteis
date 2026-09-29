@@ -157,3 +157,4 @@ tabela |>
                      round(3) * 100,
                    .by = BR) |> 
   dplyr::arrange(n |> dplyr::desc())
+
